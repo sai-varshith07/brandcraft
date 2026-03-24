@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "framework": "create-react-app",
+  "functions": {
+    "api/chat.js":            { "memory": 512, "maxDuration": 30 },
+    "api/gemini-image.js":    { "memory": 512, "maxDuration": 30 },
+    "api/stability-image.js": { "memory": 512, "maxDuration": 30 },
+    "api/debug-keys.js":      { "memory": 128, "maxDuration": 10 }
+  },
+  "rewrites": [
+    { "source": "/api/chat",             "destination": "/api/chat" },
+    { "source": "/api/gemini-image",     "destination": "/api/gemini-image" },
+    { "source": "/api/stability-image",  "destination": "/api/stability-image" },
+    { "source": "/api/debug-keys",       "destination": "/api/debug-keys" },
+    { "source": "/(.*)",                 "destination": "/index.html" }
+  ]
+}

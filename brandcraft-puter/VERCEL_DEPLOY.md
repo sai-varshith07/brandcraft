@@ -7,6 +7,8 @@ commit# BrandCraft Vercel Deployment Guide
    - GROQ API Key: https://console.groq.com
    - Gemini API Key: https://aistudio.google.com/app/apikey
    - Stability AI API Key: https://platform.stability.ai/account/api-keys
+   - GitHub Personal Access Token (repo scope): https://github.com/settings/tokens
+   - Vercel API Token: https://vercel.com/account/tokens
 
 ## Deployment Steps
 
@@ -36,6 +38,8 @@ commit# BrandCraft Vercel Deployment Guide
    - `GROQ_API_KEY` = your Groq API key
    - `GEMINI_API_KEY` = your Gemini API key
    - `STABILITY_API_KEY` = your Stability AI API key
+   - `GITHUB_TOKEN` = your GitHub token
+   - `VERCEL_TOKEN` = your Vercel API token
 
 ### Option 2: Deploy via GitHub
 
@@ -54,6 +58,8 @@ commit# BrandCraft Vercel Deployment Guide
    - `GROQ_API_KEY`
    - `GEMINI_API_KEY` 
    - `STABILITY_API_KEY`
+   - `GITHUB_TOKEN`
+   - `VERCEL_TOKEN`
 
 6. Click "Deploy"
 
@@ -65,6 +71,7 @@ brandcraft/
 │   ├── chat.js              # Groq chat proxy
 │   ├── gemini-image.js      # Gemini image generation
 │   ├── stability-image.js   # Stability AI image generation
+│   ├── deploy.js            # Vercel & GitHub deployment API
 │   └── debug-keys.js        # Debug endpoint
 ├── build/                   # Production React build
 ├── src/                     # React source code
@@ -80,6 +87,7 @@ After deployment, your API endpoints will be:
 - `https://your-project.vercel.app/api/chat`
 - `https://your-project.vercel.app/api/gemini-image`
 - `https://your-project.vercel.app/api/stability-image`
+- `https://your-project.vercel.app/api/deploy`
 - `https://your-project.vercel.app/api/debug-keys`
 
 ## Troubleshooting
@@ -99,4 +107,3 @@ vercel dev
 ```
 
 This will run both the React app and API functions locally.
-

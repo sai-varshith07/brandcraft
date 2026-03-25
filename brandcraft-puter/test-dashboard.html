@@ -1,0 +1,856 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrandCraft Dashboard Preview</title>
+    <style>
+        :root {
+            --violet: #7c4dff;
+            --violet-2: #ab63ff;
+            --pink: #f050a8;
+            --blue: #5a8bff;
+            --mint: #00c9b4;
+            --gold: #ffb300;
+            --text: #2a185d;
+            --text-2: #5f4d8c;
+            --muted: #7a69a9;
+            --panel: rgba(255, 255, 255, 0.76);
+            --border: rgba(255, 255, 255, 0.94);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: var(--text);
+            background: linear-gradient(145deg, #fff1f7 0%, #f4e9ff 42%, #eaf3ff 100%);
+        }
+
+        .bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(96px);
+            opacity: 0.55;
+        }
+
+        .orb.violet {
+            width: 340px;
+            height: 340px;
+            top: 40px;
+            left: 5%;
+            background: rgba(124, 77, 255, 0.35);
+        }
+
+        .orb.purple {
+            width: 280px;
+            height: 280px;
+            top: 240px;
+            left: 24%;
+            background: rgba(171, 99, 255, 0.28);
+        }
+
+        .orb.pink {
+            width: 300px;
+            height: 300px;
+            top: 130px;
+            right: 8%;
+            background: rgba(240, 80, 168, 0.28);
+        }
+
+        .orb.blue {
+            width: 270px;
+            height: 270px;
+            bottom: 120px;
+            left: 34%;
+            background: rgba(90, 139, 255, 0.22);
+        }
+
+        .orb.gold {
+            width: 220px;
+            height: 220px;
+            bottom: 88px;
+            right: 16%;
+            background: rgba(255, 179, 0, 0.2);
+        }
+
+        .orb.mint {
+            width: 220px;
+            height: 220px;
+            bottom: 210px;
+            right: 30%;
+            background: rgba(0, 201, 180, 0.16);
+        }
+
+        .app {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 248px minmax(0, 1fr);
+            gap: 24px;
+            padding: 16px;
+        }
+
+        .sidebar,
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            box-shadow: 0 24px 56px rgba(124, 77, 255, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(24px);
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 16px;
+            height: calc(100vh - 32px);
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 4px 6px;
+        }
+
+        .logo-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            background: linear-gradient(135deg, var(--violet), var(--violet-2), var(--pink));
+            box-shadow: 0 10px 22px rgba(124, 77, 255, 0.3);
+        }
+
+        .logo h2,
+        h1,
+        h3,
+        h4 {
+            margin: 0;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(124, 77, 255, 0.1);
+            color: var(--violet);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .side-label,
+        .mini-label {
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .side-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .side-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 14px;
+            border-radius: 16px;
+            color: var(--text-2);
+            font-weight: 700;
+            background: transparent;
+        }
+
+        .side-link.active {
+            color: var(--violet);
+            background: linear-gradient(135deg, rgba(124, 77, 255, 0.16), rgba(240, 80, 168, 0.09));
+            box-shadow: 0 8px 18px rgba(124, 77, 255, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+        }
+
+        .side-link.active::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 4px;
+            border-radius: 999px;
+            background: linear-gradient(180deg, var(--violet), var(--violet-2), var(--pink));
+        }
+
+        .upgrade {
+            margin-top: auto;
+            padding: 16px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(247, 241, 255, 0.84));
+            border: 1px solid rgba(124, 77, 255, 0.12);
+        }
+
+        .upgrade button,
+        .actions button {
+            border: none;
+            cursor: pointer;
+            border-radius: 14px;
+            padding: 12px 18px;
+            font-weight: 700;
+        }
+
+        .upgrade button,
+        .primary {
+            color: white;
+            background: linear-gradient(135deg, var(--violet), var(--violet-2), var(--pink));
+            box-shadow: 0 14px 28px rgba(124, 77, 255, 0.24);
+        }
+
+        .secondary {
+            color: #6e4fd2;
+            background: rgba(124, 77, 255, 0.08);
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .panel {
+            padding: 24px;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 20px;
+        }
+
+        .hero p,
+        p {
+            margin: 0;
+            color: var(--text-2);
+            line-height: 1.6;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .grid4,
+        .grid3,
+        .grid2 {
+            display: grid;
+            gap: 16px;
+        }
+
+        .grid4 {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .grid3 {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .grid2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .score-layout {
+            display: flex;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .score-layout>* {
+            align-self: flex-start;
+            height: auto;
+        }
+
+        .score-layout>section:first-child {
+            flex: 1.1 1 0;
+        }
+
+        .score-layout>.score-side {
+            flex: .9 1 320px;
+        }
+
+        .score-side {
+            display: grid;
+            gap: 18px;
+        }
+
+        .card,
+        .score-card,
+        .tool-group {
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(124, 77, 255, 0.12);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 10px 22px rgba(124, 77, 255, 0.06);
+        }
+
+        .summary {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 5px;
+            border-radius: 999px;
+        }
+
+        .summary.violet::after {
+            background: linear-gradient(90deg, var(--violet), var(--violet-2));
+        }
+
+        .summary.pink::after {
+            background: linear-gradient(90deg, var(--pink), #ff83cf);
+        }
+
+        .summary.blue::after {
+            background: linear-gradient(90deg, #4facfe, var(--blue));
+        }
+
+        .summary.gold::after {
+            background: linear-gradient(90deg, var(--gold), #ffd45e);
+        }
+
+        .big {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            margin-bottom: 8px;
+            color: var(--violet);
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .big small {
+            margin-bottom: 4px;
+            color: #947ed0;
+            font-size: 14px;
+        }
+
+        .scoreboard {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .glance-strip {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .score-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.86), rgba(249, 244, 255, 0.8));
+            box-shadow: inset 5px 5px 10px rgba(188, 172, 224, 0.18), inset -5px -5px 10px rgba(255, 255, 255, 0.9);
+        }
+
+        .score-card strong {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 28px;
+            color: var(--text);
+        }
+
+        .glance-card {
+            padding: 15px 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.66);
+            border: 1px solid rgba(124, 77, 255, 0.1);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.84), 0 8px 18px rgba(124, 77, 255, 0.05);
+        }
+
+        .glance-card strong {
+            display: block;
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.45;
+        }
+
+        .bar {
+            height: 12px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: rgba(124, 77, 255, 0.08);
+            box-shadow: inset 4px 4px 8px rgba(192, 178, 226, 0.26), inset -4px -4px 8px rgba(255, 255, 255, 0.92);
+        }
+
+        .bar>div {
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--mint), #5ee6d7);
+        }
+
+        .bar.violet>div {
+            background: linear-gradient(90deg, var(--violet), var(--violet-2));
+        }
+
+        .bar.pink>div {
+            background: linear-gradient(90deg, var(--pink), #ff83cf);
+        }
+
+        .bar.gold>div {
+            background: linear-gradient(90deg, var(--gold), #ffd45e);
+        }
+
+        .brand-score {
+            display: grid;
+            justify-items: center;
+            gap: 16px;
+        }
+
+        .brand-copy {
+            text-align: center;
+        }
+
+        .brand-copy strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 18px;
+        }
+
+        .radar-wrap {
+            display: grid;
+            justify-items: center;
+            gap: 14px;
+        }
+
+        .legend {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.66);
+            border: 1px solid rgba(124, 77, 255, 0.1);
+        }
+
+        .swatch {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .tool-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .tool-chip {
+            min-width: 150px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: rgba(124, 77, 255, 0.08);
+            color: #40227f;
+            box-shadow: inset 4px 4px 8px rgba(193, 178, 225, 0.2), inset -4px -4px 8px rgba(255, 255, 255, 0.82);
+        }
+
+        .tool-chip small {
+            display: block;
+            margin-top: 4px;
+            color: #826eb5;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 1180px) {
+            .app {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 980px) {
+
+            .grid4,
+            .grid3,
+            .grid2,
+            .scoreboard,
+            .glance-strip,
+            .legend {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .score-layout {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .actions {
+                width: 100%;
+            }
+
+            .actions button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg">
+        <div class="orb violet"></div>
+        <div class="orb purple"></div>
+        <div class="orb pink"></div>
+        <div class="orb blue"></div>
+        <div class="orb gold"></div>
+        <div class="orb mint"></div>
+    </div>
+
+    <div class="app">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-badge">📘</div>
+                <div>
+                    <h2>BrandCraft</h2>
+                    <div class="mini-label">Brand Studio</div>
+                </div>
+            </div>
+
+            <div class="side-label">Navigation</div>
+            <nav class="side-nav">
+                <div class="side-link active">🏠 Dashboard</div>
+                <div class="side-link">🔍 Discover</div>
+                <div class="side-link">🎨 Brand Identity</div>
+                <div class="side-link">✍️ Content & Copy</div>
+                <div class="side-link">📋 Manage</div>
+                <div class="side-link">🚀 Share</div>
+            </nav>
+
+            <div class="upgrade">
+                <div class="mini-label" style="margin-bottom:8px;">Upgrade</div>
+                <h4 style="margin:0 0 8px;">Unlock deeper launch support</h4>
+                <p style="margin-bottom:12px;">Get stronger brand scoring, exports, and premium strategy guidance.</p>
+                <button>Upgrade now</button>
+            </div>
+        </aside>
+
+        <main class="main">
+            <section class="panel hero">
+                <div>
+                    <div class="eyebrow">Brand overview</div>
+                    <h1>Aurora Atelier</h1>
+                    <p>This dashboard now centers the 12 onboarding inputs, AI suggestions, score board, radar view, all
+                        tools, and the tools already used.</p>
+                </div>
+                <div class="actions">
+                    <button class="primary">Edit 12 answers</button>
+                    <button class="secondary">Export brand PDF</button>
+                </div>
+            </section>
+
+            <section class="grid4">
+                <div class="panel summary violet"><span class="label">Overall Score</span><span
+                        class="big">84<small>/100</small></span>
+                    <p>How ready the brand is across profile, outputs, and selections.</p>
+                </div>
+                <div class="panel summary pink"><span class="label">Identity Strength</span><span
+                        class="big">88<small>%</small></span>
+                    <p>Logo, color, and aesthetic inputs are shaping a stronger brand system.</p>
+                </div>
+                <div class="panel summary blue"><span class="label">Tool Coverage</span><span
+                        class="big">31<small>%</small></span>
+                    <p>Shows how many tools have already contributed to the build.</p>
+                </div>
+                <div class="panel summary gold"><span class="label">Activation</span><span
+                        class="big">71<small>%</small></span>
+                    <p>Measures progress from raw inputs into selected brand assets.</p>
+                </div>
+            </section>
+
+            <section class="score-layout">
+                <section class="panel">
+                    <div class="eyebrow">Score Board</div>
+                    <h3 style="margin-bottom:18px;">Progress at a glance</h3>
+                    <div class="scoreboard">
+                        <div class="score-card"><span class="label">12 Questions</span><strong>12/12</strong>
+                            <div class="bar">
+                                <div style="width:100%"></div>
+                            </div>
+                        </div>
+                        <div class="score-card"><span class="label">Tools Used</span><strong>9</strong>
+                            <div class="bar violet">
+                                <div style="width:31%"></div>
+                            </div>
+                        </div>
+                        <div class="score-card"><span class="label">Selected Outputs</span><strong>5/7</strong>
+                            <div class="bar pink">
+                                <div style="width:71%"></div>
+                            </div>
+                        </div>
+                        <div class="score-card"><span class="label">AI Readiness</span><strong>86%</strong>
+                            <div class="bar gold">
+                                <div style="width:86%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glance-strip">
+                        <div class="glance-card"><span class="label">Current focus</span><strong>Explore more
+                                tools</strong></div>
+                        <div class="glance-card"><span class="label">Best signal</span><strong>Identity system is
+                                leading</strong></div>
+                        <div class="glance-card"><span class="label">Next milestone</span><strong>2 more selections to
+                                finish</strong></div>
+                    </div>
+                </section>
+
+                <div class="score-side">
+                    <section class="panel">
+                        <div class="eyebrow">Brand Score</div>
+                        <h3 style="margin-bottom:18px;">Readiness ring</h3>
+                        <div class="brand-score">
+                            <svg viewBox="0 0 160 160" width="180" height="180" aria-label="Brand score 50 out of 100">
+                                <defs>
+                                    <linearGradient id="brandScoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#7C4DFF" />
+                                        <stop offset="55%" stop-color="#AB63FF" />
+                                        <stop offset="100%" stop-color="#F050A8" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="80" cy="80" r="54" fill="none" stroke="rgba(124,77,255,0.12)"
+                                    stroke-width="12"></circle>
+                                <circle cx="80" cy="80" r="54" fill="none" stroke="url(#brandScoreGradient)"
+                                    stroke-width="12" stroke-linecap="round" stroke-dasharray="339.292"
+                                    stroke-dashoffset="169.646" transform="rotate(-90 80 80)"></circle>
+                                <circle cx="80" cy="80" r="45" fill="rgba(255,255,255,0.8)"
+                                    stroke="rgba(124,77,255,0.08)"></circle>
+                                <text x="80" y="74" text-anchor="middle" font-size="32" font-weight="800"
+                                    fill="#2f1a6a">50</text>
+                                <text x="80" y="96" text-anchor="middle" font-size="13" font-weight="800"
+                                    fill="#7a69a9">/100</text>
+                            </svg>
+                            <div class="brand-copy">
+                                <strong>Brand reach 50/100</strong>
+                                <p>The ring fills as your profile, tools, outputs, and selections become more complete
+                                    and launch-ready.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <div class="eyebrow">Radar</div>
+                        <h3 style="margin-bottom:18px;">Brand balance map</h3>
+                        <div class="radar-wrap">
+                            <svg viewBox="0 0 280 280" width="280" height="280" aria-label="Brand radar chart">
+                                <polygon points="140,48 227.5,111.5 194,214.5 86,214.5 52.5,111.5" fill="none"
+                                    stroke="rgba(124,77,255,0.12)" />
+                                <polygon points="140,71 205.5,118.25 180.5,195.25 99.5,195.25 74.5,118.25" fill="none"
+                                    stroke="rgba(124,77,255,0.12)" />
+                                <polygon points="140,94 183.75,125 167,176 113,176 96.25,125" fill="none"
+                                    stroke="rgba(124,77,255,0.12)" />
+                                <polygon points="140,117 162,132 153.5,156.5 126.5,156.5 118,132" fill="none"
+                                    stroke="rgba(124,77,255,0.12)" />
+                                <line x1="140" y1="140" x2="140" y2="48" stroke="rgba(124,77,255,0.12)" />
+                                <line x1="140" y1="140" x2="227.5" y2="111.5" stroke="rgba(124,77,255,0.12)" />
+                                <line x1="140" y1="140" x2="194" y2="214.5" stroke="rgba(124,77,255,0.12)" />
+                                <line x1="140" y1="140" x2="86" y2="214.5" stroke="rgba(124,77,255,0.12)" />
+                                <line x1="140" y1="140" x2="52.5" y2="111.5" stroke="rgba(124,77,255,0.12)" />
+                                <polygon points="140,60.88 216.4,115.13 174.56,187.56 101.12,193.56 64.65,115.88"
+                                    fill="rgba(124,77,255,0.18)" stroke="rgba(124,77,255,0.64)" stroke-width="2.2" />
+                                <circle cx="140" cy="60.88" r="6" fill="#7c4dff" />
+                                <circle cx="216.4" cy="115.13" r="6" fill="#f050a8" />
+                                <circle cx="174.56" cy="187.56" r="6" fill="#5a8bff" />
+                                <circle cx="101.12" cy="193.56" r="6" fill="#00c9b4" />
+                                <circle cx="64.65" cy="115.88" r="6" fill="#ffb300" />
+                                <text x="140" y="28" text-anchor="middle" font-size="11" font-weight="800"
+                                    fill="#644e9a">Strategy</text>
+                                <text x="244" y="112" text-anchor="middle" font-size="11" font-weight="800"
+                                    fill="#644e9a">Identity</text>
+                                <text x="205" y="233" text-anchor="middle" font-size="11" font-weight="800"
+                                    fill="#644e9a">Content</text>
+                                <text x="74" y="233" text-anchor="middle" font-size="11" font-weight="800"
+                                    fill="#644e9a">Trust</text>
+                                <text x="34" y="112" text-anchor="middle" font-size="11" font-weight="800"
+                                    fill="#644e9a">Launch</text>
+                            </svg>
+
+                            <div class="legend">
+                                <div class="legend-item"><span class="swatch"
+                                        style="background:#7c4dff"></span><strong>86</strong><span>Strategy</span></div>
+                                <div class="legend-item"><span class="swatch"
+                                        style="background:#f050a8"></span><strong>88</strong><span>Identity</span></div>
+                                <div class="legend-item"><span class="swatch"
+                                        style="background:#5a8bff"></span><strong>72</strong><span>Content</span></div>
+                                <div class="legend-item"><span class="swatch"
+                                        style="background:#00c9b4"></span><strong>78</strong><span>Trust</span></div>
+                                <div class="legend-item"><span class="swatch"
+                                        style="background:#ffb300"></span><strong>71</strong><span>Launch</span></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="eyebrow">12 Questions</div>
+                <h3>Input data from onboarding</h3>
+                <div class="grid3" style="margin-top:18px">
+                    <div class="card"><span class="label">Business</span><strong>Handmade premium candles for mindful
+                            homes</strong></div>
+                    <div class="card"><span class="label">Industry</span><strong>Home Decor</strong></div>
+                    <div class="card"><span class="label">Stage</span><strong>Growing</strong></div>
+                    <div class="card"><span class="label">Target Age</span><strong>Millennial, Gen X</strong></div>
+                    <div class="card"><span class="label">Gender Focus</span><strong>Neutral</strong></div>
+                    <div class="card"><span class="label">Color Mood</span><strong>Pastel Violet</strong></div>
+                    <div class="card"><span class="label">Logo Style</span><strong>Wordmark</strong></div>
+                    <div class="card"><span class="label">Design Aesthetic</span><strong>Elegant</strong></div>
+                    <div class="card"><span class="label">Imagery Style</span><strong>Photography</strong></div>
+                    <div class="card"><span class="label">Personality</span><strong>Playful 42 • Minimal 68 • Modern
+                            74</strong></div>
+                    <div class="card"><span class="label">Brand Voice</span><strong>Inspiring</strong></div>
+                    <div class="card"><span class="label">Brand Goals</span><strong>Build Trust, Look Premium</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="eyebrow">AI Suggestions</div>
+                <h3>Recommended next moves</h3>
+                <div class="grid3" style="margin-top:18px">
+                    <div class="card"><span class="label">01</span><strong>Sharpen your message</strong>
+                        <p>Turn your strongest audience benefit into a single promise you can repeat across channels.
+                        </p>
+                    </div>
+                    <div class="card"><span class="label">02</span><strong>Expand your toolkit</strong>
+                        <p>Use the brand identity and content tools together so the visuals and copy feel like one
+                            system.</p>
+                    </div>
+                    <div class="card"><span class="label">03</span><strong>Close the launch loop</strong>
+                        <p>Convert your selected outputs into a tighter rollout pack with one hero message and one CTA.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="eyebrow">All Tools</div>
+                <h3>Everything available in the studio</h3>
+                <div class="grid2" style="margin-top:18px">
+                    <div class="tool-group">
+                        <strong style="color:#7c4dff">Discover</strong>
+                        <div class="tool-list">
+                            <div class="tool-chip">Domain Checker<small>Available</small></div>
+                            <div class="tool-chip">Steal This Brand<small>Available</small></div>
+                            <div class="tool-chip">Brand Story<small>Used</small></div>
+                            <div class="tool-chip">Market Research<small>Available</small></div>
+                            <div class="tool-chip">Growth Hacker<small>Available</small></div>
+                        </div>
+                    </div>
+                    <div class="tool-group">
+                        <strong style="color:#ab63ff">Brand Identity</strong>
+                        <div class="tool-list">
+                            <div class="tool-chip">Brand Names<small>Used</small></div>
+                            <div class="tool-chip">Logo Creator<small>Used</small></div>
+                            <div class="tool-chip">Color Palette<small>Used</small></div>
+                            <div class="tool-chip">Font Pairing<small>Available</small></div>
+                            <div class="tool-chip">Mission & Vision<small>Available</small></div>
+                            <div class="tool-chip">Website Generator<small>Available</small></div>
+                        </div>
+                    </div>
+                    <div class="tool-group">
+                        <strong style="color:#f050a8">Content & Copy</strong>
+                        <div class="tool-list">
+                            <div class="tool-chip">Ad Copy<small>Used</small></div>
+                            <div class="tool-chip">Social Bio<small>Used</small></div>
+                            <div class="tool-chip">Email Templates<small>Available</small></div>
+                            <div class="tool-chip">Content Calendar<small>Available</small></div>
+                            <div class="tool-chip">Content Automation<small>Available</small></div>
+                        </div>
+                    </div>
+                    <div class="tool-group">
+                        <strong style="color:#5a8bff">Voice, Manage, Share</strong>
+                        <div class="tool-list">
+                            <div class="tool-chip">Voice Rewriter<small>Available</small></div>
+                            <div class="tool-chip">Brand Score<small>Available</small></div>
+                            <div class="tool-chip">Brand Card<small>Available</small></div>
+                            <div class="tool-chip">QR Code<small>Available</small></div>
+                            <div class="tool-chip">Canva Export<small>Available</small></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="eyebrow">Tools Used</div>
+                <h3>Tools you have already used</h3>
+                <div class="grid3" style="margin-top:18px">
+                    <div class="card"><span class="label">Brand Identity</span><strong>Brand Names</strong></div>
+                    <div class="card"><span class="label">Brand Identity</span><strong>Color Palette</strong></div>
+                    <div class="card"><span class="label">Brand Identity</span><strong>Logo Creator</strong></div>
+                    <div class="card"><span class="label">Content & Copy</span><strong>Ad Copy</strong></div>
+                    <div class="card"><span class="label">Content & Copy</span><strong>Social Bio</strong></div>
+                    <div class="card"><span class="label">Discover</span><strong>Brand Story</strong></div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

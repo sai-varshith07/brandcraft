@@ -105,6 +105,142 @@ const tools = [
     accent: "#00897B",
     pattern: "radial-gradient(circle at 30% 70%, rgba(255,255,255,0.15) 0%, transparent 55%)",
   },
+  {
+    name: "Lead Magnet",
+    emoji: "🧲",
+    desc: "Irresistible freebies to grow your audience",
+    gradient: "linear-gradient(135deg, #F57C00 0%, #FFB74D 100%)",
+    accent: "#F57C00",
+    pattern: "radial-gradient(circle at 40% 60%, rgba(255,255,255,0.15) 0%, transparent 55%)",
+  },
+  {
+    name: "Growth Hacker",
+    emoji: "🚀",
+    desc: "Unconventional strategies to scale fast",
+    gradient: "linear-gradient(135deg, #D81B60 0%, #F06292 100%)",
+    accent: "#D81B60",
+    pattern: "radial-gradient(circle at 60% 40%, rgba(255,255,255,0.18) 0%, transparent 50%)",
+  },
+  {
+    name: "Domain Checker",
+    emoji: "🌐",
+    desc: "Find the perfect home for your brand",
+    gradient: "linear-gradient(135deg, #1E88E5 0%, #64B5F6 100%)",
+    accent: "#1E88E5",
+    pattern: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 60%)",
+  },
+  {
+    name: "Steal This Brand",
+    emoji: "🕵️",
+    desc: "Reverse-engineer your competition",
+    gradient: "linear-gradient(135deg, #8E24AA 0%, #BA68C8 100%)",
+    accent: "#8E24AA",
+    pattern: "radial-gradient(circle at 20% 80%, rgba(255,255,255,0.12) 0%, transparent 50%)",
+  },
+  {
+    name: "Brand Story",
+    emoji: "📖",
+    desc: "Narratives that captivate your audience",
+    gradient: "linear-gradient(135deg, #00ACC1 0%, #4DB6AC 100%)",
+    accent: "#00ACC1",
+    pattern: "radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0%, transparent 55%)",
+  },
+  {
+    name: "Market Research",
+    emoji: "📈",
+    desc: "Data-driven insights for your niche",
+    gradient: "linear-gradient(135deg, #FFB300 0%, #FFCA28 100%)",
+    accent: "#FFB300",
+    pattern: "radial-gradient(circle at 30% 70%, rgba(255,255,255,0.18) 0%, transparent 60%)",
+  },
+  {
+    name: "Mission & Vision",
+    emoji: "🧭",
+    desc: "Define your core purpose and future",
+    gradient: "linear-gradient(135deg, #F4511E 0%, #FF8A65 100%)",
+    accent: "#F4511E",
+    pattern: "radial-gradient(circle at 70% 30%, rgba(255,255,255,0.12) 0%, transparent 50%)",
+  },
+  {
+    name: "Website Generator",
+    emoji: "💻",
+    desc: "Single-page branded HTML websites",
+    gradient: "linear-gradient(135deg, #43A047 0%, #81C784 100%)",
+    accent: "#43A047",
+    pattern: "radial-gradient(circle at 40% 60%, rgba(255,255,255,0.15) 0%, transparent 55%)",
+  },
+  {
+    name: "Post Mockup",
+    emoji: "🖼️",
+    desc: "Visualize your social media content",
+    gradient: "linear-gradient(135deg, #E53935 0%, #EF5350 100%)",
+    accent: "#E53935",
+    pattern: "radial-gradient(circle at 60% 40%, rgba(255,255,255,0.18) 0%, transparent 50%)",
+  },
+  {
+    name: "Content Auto",
+    emoji: "🤖",
+    desc: "Multi-week content strategies instantly",
+    gradient: "linear-gradient(135deg, #3949AB 0%, #7986CB 100%)",
+    accent: "#3949AB",
+    pattern: "radial-gradient(circle at 25% 75%, rgba(255,255,255,0.15) 0%, transparent 55%)",
+  },
+  {
+    name: "Ad Generator",
+    emoji: "🎯",
+    desc: "High-converting variations by Claude",
+    gradient: "linear-gradient(135deg, #8E24AA 0%, #CE93D8 100%)",
+    accent: "#8E24AA",
+    pattern: "radial-gradient(circle at 75% 25%, rgba(255,255,255,0.16) 0%, transparent 50%)",
+  },
+  {
+    name: "Buyer Persona",
+    emoji: "👥",
+    desc: "Deep psychological audience profiles",
+    gradient: "linear-gradient(135deg, #039BE5 0%, #64B5F6 100%)",
+    accent: "#039BE5",
+    pattern: "radial-gradient(circle at 35% 65%, rgba(255,255,255,0.14) 0%, transparent 55%)",
+  },
+  {
+    name: "Consistency Checker",
+    emoji: "🔬",
+    desc: "Ensure your brand stays on-point",
+    gradient: "linear-gradient(135deg, #00897B 0%, #4DB6AC 100%)",
+    accent: "#00897B",
+    pattern: "radial-gradient(circle at 65% 35%, rgba(255,255,255,0.17) 0%, transparent 50%)",
+  },
+  {
+    name: "Finances",
+    emoji: "🧮",
+    desc: "Estimate costs and profit margins",
+    gradient: "linear-gradient(135deg, #FDD835 0%, #FFF176 100%)",
+    accent: "#FDD835",
+    pattern: "radial-gradient(circle at 45% 55%, rgba(255,255,255,0.14) 0%, transparent 52%)",
+  },
+  {
+    name: "Brand Card",
+    emoji: "🃏",
+    desc: "Shareable digital identity cards",
+    gradient: "linear-gradient(135deg, #D81B60 0%, #F06292 100%)",
+    accent: "#D81B60",
+    pattern: "radial-gradient(circle at 55% 45%, rgba(255,255,255,0.12) 0%, transparent 55%)",
+  },
+  {
+    name: "QR Code",
+    emoji: "📱",
+    desc: "Custom QR codes for your assets",
+    gradient: "linear-gradient(135deg, #5E35B1 0%, #9FA8DA 100%)",
+    accent: "#5E35B1",
+    pattern: "radial-gradient(circle at 30% 70%, rgba(255,255,255,0.15) 0%, transparent 55%)",
+  },
+  {
+    name: "Canva Export",
+    emoji: "🖌️",
+    desc: "Ready-to-use Canva templates",
+    gradient: "linear-gradient(135deg, #00ACC1 0%, #80DEEA 100%)",
+    accent: "#00ACC1",
+    pattern: "radial-gradient(circle at 40% 60%, rgba(255,255,255,0.15) 0%, transparent 55%)",
+  },
 ];
 
 const VISIBLE_SIDE = 2;
@@ -174,7 +310,7 @@ export default function FanCarousel({ onNav }) {
           fontSize: 12, fontWeight: 700, color: "#7C4DFF",
           fontFamily: "Nunito", letterSpacing: "1.5px", textTransform: "uppercase",
         }}>
-          📖 Chapter 1 · 13 Enchanted Tools
+          📖 Chapter 1 · 30 Enchanted Tools
         </div>
 
         <h2 style={{ fontSize: "clamp(38px, 5.5vw, 66px)", lineHeight: 1.06, color: "#1A0F3C", marginBottom: 24, letterSpacing: "-0.02em" }}>
@@ -188,7 +324,7 @@ export default function FanCarousel({ onNav }) {
         </h2>
 
         <p style={{ fontSize: 18, color: "#6B5B8A", lineHeight: 1.8, fontFamily: "Nunito", fontWeight: 500, maxWidth: 520, margin: "0 auto 36px" }}>
-          13 AI-powered tools working in harmony — from your first name to your final campaign.
+          30 AI-powered tools working in harmony — from your first name to your final campaign.
         </p>
 
         <button
@@ -205,7 +341,7 @@ export default function FanCarousel({ onNav }) {
         >
           Start Building Free
           <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
           </svg>
         </button>
       </div>
@@ -237,14 +373,14 @@ export default function FanCarousel({ onNav }) {
             return (
               <div
                 key={`card-${idx}-${offset}`}
-                onClick={() => !isCenter && navigate(center + offset)}
+                onClick={() => isCenter ? (onNav && onNav("signup")) : navigate(center + offset)}
                 style={{
                   position: "absolute", top: 0, left: 0,
                   width: 280, height: 380,
                   marginLeft: -140,
                   borderRadius: 24,
                   background: tool.gradient,
-                  cursor: isCenter ? "default" : "pointer",
+                  cursor: "pointer",
                   transformStyle: "preserve-3d",
                   transform: `translateX(${t.translateX}px) translateY(${t.translateY}px) translateZ(${t.translateZ}px) rotateY(${t.rotateY}deg) scale(${t.scale})`,
                   transition: "transform 620ms cubic-bezier(0.34, 1.28, 0.64, 1), opacity 380ms ease, box-shadow 280ms ease",
@@ -253,8 +389,8 @@ export default function FanCarousel({ onNav }) {
                   boxShadow: isCenter
                     ? "0 32px 64px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.16)"
                     : Math.abs(offset) === 1
-                    ? "0 16px 40px rgba(0,0,0,0.18)"
-                    : "0 8px 20px rgba(0,0,0,0.12)",
+                      ? "0 16px 40px rgba(0,0,0,0.18)"
+                      : "0 8px 20px rgba(0,0,0,0.12)",
                   overflow: "hidden",
                   userSelect: "none",
                   willChange: "transform",
@@ -281,17 +417,32 @@ export default function FanCarousel({ onNav }) {
                     </div>
                   </div>
 
-                  {/* Badge */}
-                  <div style={{
-                    display: "inline-flex", alignItems: "center", gap: 6,
-                    background: "rgba(255,255,255,0.18)", backdropFilter: "blur(8px)",
-                    border: "1px solid rgba(255,255,255,0.28)",
-                    borderRadius: 99, padding: "7px 14px",
-                    fontSize: 12, fontWeight: 700, color: "#fff",
-                    fontFamily: "Nunito", alignSelf: "flex-start",
-                  }}>
-                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: "rgba(255,255,255,0.9)", display: "inline-block" }} />
-                    Tool {String(tools.indexOf(tool) + 1).padStart(2, "0")} / {tools.length}
+                  {/* Footer (Badge + CTA) */}
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <div style={{
+                      display: "inline-flex", alignItems: "center", gap: 6,
+                      background: "rgba(255,255,255,0.18)", backdropFilter: "blur(8px)",
+                      border: "1px solid rgba(255,255,255,0.28)",
+                      borderRadius: 99, padding: "7px 14px",
+                      fontSize: 12, fontWeight: 700, color: "#fff",
+                      fontFamily: "Nunito",
+                    }}>
+                      <span style={{ width: 6, height: 6, borderRadius: "50%", background: "rgba(255,255,255,0.9)", display: "inline-block" }} />
+                      Tool {String(tools.indexOf(tool) + 1).padStart(2, "0")} / {tools.length}
+                    </div>
+
+                    {isCenter && (
+                      <div style={{
+                        display: "inline-flex", alignItems: "center", gap: 4,
+                        background: "rgba(255,255,255,0.25)", backdropFilter: "blur(8px)",
+                        border: "1px solid rgba(255,255,255,0.4)",
+                        borderRadius: 99, padding: "7px 14px",
+                        fontSize: 12, fontWeight: 800, color: "#fff",
+                        fontFamily: "Nunito", transition: "all 0.2s",
+                      }}>
+                        Try it <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -316,7 +467,7 @@ export default function FanCarousel({ onNav }) {
           onMouseLeave={e => { e.currentTarget.style.transform = "translateY(-50%) scale(1)"; e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.14)"; }}
         >
           <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-            <polyline points="15 18 9 12 15 6"/>
+            <polyline points="15 18 9 12 15 6" />
           </svg>
         </button>
 
@@ -337,7 +488,7 @@ export default function FanCarousel({ onNav }) {
           onMouseLeave={e => { e.currentTarget.style.transform = "translateY(-50%) scale(1)"; e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.14)"; }}
         >
           <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-            <polyline points="9 18 15 12 9 6"/>
+            <polyline points="9 18 15 12 9 6" />
           </svg>
         </button>
       </div>

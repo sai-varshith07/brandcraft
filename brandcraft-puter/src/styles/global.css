@@ -694,10 +694,14 @@ button { font-family: 'Nunito', sans-serif; cursor: pointer; }
   color: var(--text2); transition: all 0.2s var(--spring);
 }
 .mobile-nav-item.active { color: var(--violet); transform: translateY(-2px); }
+.app-shell-sidebar { display: flex; }
+.app-shell-main { padding-left: 288px; }
 @media (max-width: 768px) {
   .page-shell { padding: 0 16px 88px; }
   .page-shell-tabs { flex-wrap: wrap; }
   .page-shell-tab { padding: 7px 10px; font-size: 12px; }
+  .app-shell-sidebar { display: none !important; }
+  .app-shell-main { padding: 12px 12px 96px !important; }
   .mobile-nav { display: flex; }
 }
 

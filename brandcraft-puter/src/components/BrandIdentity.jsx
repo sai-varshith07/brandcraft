@@ -44,17 +44,17 @@ function LogoMockups({ logoUrl, brandName = "Your Brand" }) {
   const [activeAnim, setActiveAnim] = useState("none");
 
   const mocks = [
-    { id: "card",       label: "Business Card", emoji: "💼" },
-    { id: "hoodie",     label: "Hoodie",        emoji: "👕" },
-    { id: "storefront", label: "Storefront",    emoji: "🏪" },
+    { id: "card", label: "Business Card", emoji: "💼" },
+    { id: "hoodie", label: "Hoodie", emoji: "👕" },
+    { id: "storefront", label: "Storefront", emoji: "🏪" },
   ];
 
   const anims = [
-    { id: "none",   label: "Still",    css: "none" },
-    { id: "float",  label: "Float",    css: "anim-float 3s ease-in-out infinite" },
-    { id: "pulse",  label: "Pulse",    css: "anim-pulse 2s infinite" },
-    { id: "spin",   label: "Spin",     css: "anim-spin 8s linear infinite" },
-    { id: "bounce", label: "Bounce",   css: "anim-bounce 2s infinite" },
+    { id: "none", label: "Still", css: "none" },
+    { id: "float", label: "Float", css: "anim-float 3s ease-in-out infinite" },
+    { id: "pulse", label: "Pulse", css: "anim-pulse 2s infinite" },
+    { id: "spin", label: "Spin", css: "anim-spin 8s linear infinite" },
+    { id: "bounce", label: "Bounce", css: "anim-bounce 2s infinite" },
   ];
 
   return (
@@ -66,10 +66,10 @@ function LogoMockups({ logoUrl, brandName = "Your Brand" }) {
         @keyframes anim-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes anim-bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-15px); } 60% { transform: translateY(-7px); } }
       `}</style>
-      
+
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16, flexWrap: "wrap", gap: 10 }}>
         <div style={{ fontSize: 13, fontWeight: 800, color: "var(--teal)", textTransform: "uppercase", letterSpacing: "0.5px" }}>✨ Preview & Animate</div>
-        
+
         {/* Actions Right Side */}
         <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
           {/* Mockup Toolbar */}
@@ -102,82 +102,82 @@ function LogoMockups({ logoUrl, brandName = "Your Brand" }) {
       <div style={{ display: "flex", justifyContent: "center", padding: "20px 0" }}>
         {/* Business Card */}
         {activeMock === "card" && (
-            <div style={{
-              width: 340, height: 190, borderRadius: 14, background: "#fff",
-              boxShadow: "0 20px 50px rgba(0,0,0,0.22), 0 4px 12px rgba(0,0,0,0.12)",
-              display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-              position: "relative", overflow: "hidden",
-            }}>
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 6, background: "linear-gradient(90deg, var(--teal), var(--purple))" }} />
-              <div style={{ width: 60, height: 60, marginBottom: 8, animation: anims.find(a=>a.id===activeAnim)?.css }}>
-                <img src={logoUrl} alt="logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
-              </div>
-              <div style={{ fontSize: 15, fontWeight: 800, color: "#1A1232", fontFamily: "Fredoka One" }}>{brandName}</div>
-              <div style={{ fontSize: 11, color: "#9B8CB8", marginTop: 4 }}>hello@{brandName.toLowerCase().replace(/\s/g,"")}.com</div>
-              <div style={{ position: "absolute", bottom: 0, right: 0, width: 60, height: 60, background: "var(--teal-glow)", borderRadius: "50%", transform: "translate(20px, 20px)" }} />
+          <div style={{
+            width: 340, height: 190, borderRadius: 14, background: "#fff",
+            boxShadow: "0 20px 50px rgba(0,0,0,0.22), 0 4px 12px rgba(0,0,0,0.12)",
+            display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+            position: "relative", overflow: "hidden",
+          }}>
+            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 6, background: "linear-gradient(90deg, var(--teal), var(--purple))" }} />
+            <div style={{ width: 60, height: 60, marginBottom: 8, animation: anims.find(a => a.id === activeAnim)?.css }}>
+              <img src={logoUrl} alt="logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
             </div>
+            <div style={{ fontSize: 15, fontWeight: 800, color: "#1A1232", fontFamily: "Fredoka One" }}>{brandName}</div>
+            <div style={{ fontSize: 11, color: "#9B8CB8", marginTop: 4 }}>hello@{brandName.toLowerCase().replace(/\s/g, "")}.com</div>
+            <div style={{ position: "absolute", bottom: 0, right: 0, width: 60, height: 60, background: "var(--teal-glow)", borderRadius: "50%", transform: "translate(20px, 20px)" }} />
+          </div>
         )}
 
         {/* Hoodie */}
         {activeMock === "hoodie" && (
-            <div style={{ position: "relative", width: 220, height: 240 }}>
-              {/* Hoodie body */}
-              <svg viewBox="0 0 220 240" width="220" height="240">
-                <path d="M 60 30 L 20 70 L 10 140 L 40 145 L 40 220 L 180 220 L 180 145 L 210 140 L 200 70 L 160 30 Q 140 20 110 22 Q 80 20 60 30 Z" fill="#3D3560" stroke="rgba(255,255,255,0.1)" strokeWidth="1.5"/>
-                {/* Hood */}
-                <path d="M 80 30 Q 110 5 140 30 Q 125 40 110 42 Q 95 40 80 30 Z" fill="#352E52" stroke="rgba(255,255,255,0.1)" strokeWidth="1"/>
-                {/* Sleeve lines */}
-                <line x1="20" y1="70" x2="40" y2="145" stroke="rgba(255,255,255,0.06)" strokeWidth="1"/>
-                <line x1="200" y1="70" x2="180" y2="145" stroke="rgba(255,255,255,0.06)" strokeWidth="1"/>
-                {/* Pocket */}
-                <rect x="75" y="165" width="70" height="40" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" strokeWidth="1"/>
-              </svg>
-              {/* Logo on chest */}
-              <div style={{
-                position: "absolute", top: 75, left: "50%", transform: "translateX(-50%)",
-                display: "flex", flexDirection: "column", alignItems: "center",
-              }}>
-                <div style={{ width: 44, height: 44, animation: anims.find(a=>a.id===activeAnim)?.css }}>
-                  <img src={logoUrl} alt="logo" style={{ width: "100%", height: "100%", objectFit: "contain", filter: "brightness(0) invert(1)", opacity: 0.9 }} />
-                </div>
-                <div style={{ fontSize: 9, color: "rgba(255,255,255,0.7)", fontWeight: 700, marginTop: 2, letterSpacing: "1px", textTransform: "uppercase" }}>{brandName}</div>
+          <div style={{ position: "relative", width: 220, height: 240 }}>
+            {/* Hoodie body */}
+            <svg viewBox="0 0 220 240" width="220" height="240">
+              <path d="M 60 30 L 20 70 L 10 140 L 40 145 L 40 220 L 180 220 L 180 145 L 210 140 L 200 70 L 160 30 Q 140 20 110 22 Q 80 20 60 30 Z" fill="#3D3560" stroke="rgba(255,255,255,0.1)" strokeWidth="1.5" />
+              {/* Hood */}
+              <path d="M 80 30 Q 110 5 140 30 Q 125 40 110 42 Q 95 40 80 30 Z" fill="#352E52" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
+              {/* Sleeve lines */}
+              <line x1="20" y1="70" x2="40" y2="145" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
+              <line x1="200" y1="70" x2="180" y2="145" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
+              {/* Pocket */}
+              <rect x="75" y="165" width="70" height="40" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+            </svg>
+            {/* Logo on chest */}
+            <div style={{
+              position: "absolute", top: 75, left: "50%", transform: "translateX(-50%)",
+              display: "flex", flexDirection: "column", alignItems: "center",
+            }}>
+              <div style={{ width: 44, height: 44, animation: anims.find(a => a.id === activeAnim)?.css }}>
+                <img src={logoUrl} alt="logo" style={{ width: "100%", height: "100%", objectFit: "contain", filter: "brightness(0) invert(1)", opacity: 0.9 }} />
               </div>
+              <div style={{ fontSize: 9, color: "rgba(255,255,255,0.7)", fontWeight: 700, marginTop: 2, letterSpacing: "1px", textTransform: "uppercase" }}>{brandName}</div>
             </div>
+          </div>
         )}
 
         {/* Storefront */}
         {activeMock === "storefront" && (
-            <div style={{ position: "relative", width: 300, height: 210 }}>
-              {/* Building */}
-              <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: 280, height: 185, background: "#E8E4F0", borderRadius: "10px 10px 0 0", border: "2px solid #C8C0D8" }}>
-                {/* Sign board */}
-                <div style={{
-                  position: "absolute", top: 18, left: "50%", transform: "translateX(-50%)",
-                  width: 220, padding: "12px 20px", background: "#fff",
-                  borderRadius: 10, border: "3px solid var(--teal)",
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
-                  display: "flex", alignItems: "center", gap: 10, justifyContent: "center",
-                }}>
-                  <div style={{ width: 32, height: 32, animation: anims.find(a=>a.id===activeAnim)?.css }}>
-                    <img src={logoUrl} alt="logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
-                  </div>
-                  <span style={{ fontSize: 15, fontWeight: 800, color: "#1A1232", fontFamily: "Fredoka One" }}>{brandName}</span>
+          <div style={{ position: "relative", width: 300, height: 210 }}>
+            {/* Building */}
+            <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: 280, height: 185, background: "#E8E4F0", borderRadius: "10px 10px 0 0", border: "2px solid #C8C0D8" }}>
+              {/* Sign board */}
+              <div style={{
+                position: "absolute", top: 18, left: "50%", transform: "translateX(-50%)",
+                width: 220, padding: "12px 20px", background: "#fff",
+                borderRadius: 10, border: "3px solid var(--teal)",
+                boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
+                display: "flex", alignItems: "center", gap: 10, justifyContent: "center",
+              }}>
+                <div style={{ width: 32, height: 32, animation: anims.find(a => a.id === activeAnim)?.css }}>
+                  <img src={logoUrl} alt="logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
                 </div>
-                {/* Door */}
-                <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: 60, height: 90, background: "#7C6B9E", borderRadius: "6px 6px 0 0", border: "2px solid #6B5B8A" }}>
-                  <div style={{ position: "absolute", top: 12, right: 8, width: 8, height: 8, borderRadius: "50%", background: "rgba(255,215,0,0.9)" }} />
-                </div>
-                {/* Windows */}
-                {[40, 160].map(x => (
-                  <div key={x} style={{ position: "absolute", bottom: 60, left: x, width: 50, height: 50, background: "rgba(135,206,250,0.6)", borderRadius: 4, border: "2px solid #9B8CB8" }}>
-                    <div style={{ position: "absolute", top: 0, left: "50%", width: 1, height: "100%", background: "rgba(0,0,0,0.15)" }} />
-                    <div style={{ position: "absolute", top: "50%", left: 0, height: 1, width: "100%", background: "rgba(0,0,0,0.15)" }} />
-                  </div>
-                ))}
+                <span style={{ fontSize: 15, fontWeight: 800, color: "#1A1232", fontFamily: "Fredoka One" }}>{brandName}</span>
               </div>
-              {/* Ground */}
-              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 8, background: "#9B8CB8", borderRadius: "0 0 4px 4px" }} />
+              {/* Door */}
+              <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: 60, height: 90, background: "#7C6B9E", borderRadius: "6px 6px 0 0", border: "2px solid #6B5B8A" }}>
+                <div style={{ position: "absolute", top: 12, right: 8, width: 8, height: 8, borderRadius: "50%", background: "rgba(255,215,0,0.9)" }} />
+              </div>
+              {/* Windows */}
+              {[40, 160].map(x => (
+                <div key={x} style={{ position: "absolute", bottom: 60, left: x, width: 50, height: 50, background: "rgba(135,206,250,0.6)", borderRadius: 4, border: "2px solid #9B8CB8" }}>
+                  <div style={{ position: "absolute", top: 0, left: "50%", width: 1, height: "100%", background: "rgba(0,0,0,0.15)" }} />
+                  <div style={{ position: "absolute", top: "50%", left: 0, height: 1, width: "100%", background: "rgba(0,0,0,0.15)" }} />
+                </div>
+              ))}
             </div>
+            {/* Ground */}
+            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 8, background: "#9B8CB8", borderRadius: "0 0 4px 4px" }} />
+          </div>
         )}
       </div>
     </div>
@@ -267,7 +267,7 @@ function BrandNamesTool({ brandProfile, onOutput, favorites, onFavorite, selecte
       ))}
       {rounds.length > 0 && (
         <GenerateMorePanel loading={loading} onGenerate={generate}
-          chips={["More Playful","More Professional","Shorter Names","Unique/Invented","More Descriptive","International Feel"]} />
+          chips={["More Playful", "More Professional", "Shorter Names", "Unique/Invented", "More Descriptive", "International Feel"]} />
       )}
     </div>
   );
@@ -311,7 +311,7 @@ function ColorPaletteTool({ brandProfile, onOutput, selectedOutputs, onSelect })
         onOutput("Color Palette", result.palette.map(c => c.hex).join(", "));
         checkContrastSuggestions(result.palette);
       }
-    } catch {}
+    } catch { }
     setLoading(false);
   };
 
@@ -357,7 +357,7 @@ function ColorPaletteTool({ brandProfile, onOutput, selectedOutputs, onSelect })
       ))}
       {rounds.length > 0 && (
         <GenerateMorePanel loading={loading} onGenerate={generate}
-          chips={["Darker","Lighter","More Vibrant","More Muted","Warmer","Cooler","More Contrast","Pastel"]} />
+          chips={["Darker", "Lighter", "More Vibrant", "More Muted", "Warmer", "Cooler", "More Contrast", "Pastel"]} />
       )}
     </div>
   );
@@ -406,7 +406,7 @@ function FontPairingTool({ brandProfile, onOutput, selectedOutputs, onSelect }) 
         onOutput("Font Pairing", result.pairs[0]?.heading + " + " + result.pairs[0]?.body);
         checkFontSuggestions(result.pairs);
       }
-    } catch {}
+    } catch { }
     setLoading(false);
   };
 
@@ -425,7 +425,7 @@ function FontPairingTool({ brandProfile, onOutput, selectedOutputs, onSelect }) 
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {round.pairs.map((pair, i) => (
               <div key={i} className="card" style={{ padding: "20px 22px" }}>
-                <link href={`https://fonts.googleapis.com/css2?family=${pair.heading?.replace(/ /g,"+")}:wght@700&family=${pair.body?.replace(/ /g,"+")}:wght@400;500&display=swap`} rel="stylesheet" />
+                <link href={`https://fonts.googleapis.com/css2?family=${pair.heading?.replace(/ /g, "+")}:wght@700&family=${pair.body?.replace(/ /g, "+")}:wght@400;500&display=swap`} rel="stylesheet" />
                 <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 10 }}>
                   <OutputActions text={`Font Pairing: ${pair.heading} + ${pair.body} - ${pair.reason}`} onSelect={onSelect} selected={selectedOutputs["Font Pairing"]?.id === `font-${ri}-${i}`} feature="Font Pairing" id={`font-${ri}-${i}`} />
                 </div>
@@ -451,7 +451,7 @@ function FontPairingTool({ brandProfile, onOutput, selectedOutputs, onSelect }) 
       ))}
       {rounds.length > 0 && (
         <GenerateMorePanel loading={loading} onGenerate={generate}
-          chips={["More Modern","More Classic","More Playful","More Elegant","Bolder Heading","Lighter Body"]} />
+          chips={["More Modern", "More Classic", "More Playful", "More Elegant", "Bolder Heading", "Lighter Body"]} />
       )}
     </div>
   );
@@ -459,13 +459,13 @@ function FontPairingTool({ brandProfile, onOutput, selectedOutputs, onSelect }) 
 
 // ─── Logo Creator ──────────────────────────────────────────────────────────────
 function LogoCreatorTool({ brandProfile, onOutput, selectedOutputs, onSelect }) {
-  const [rounds, setRounds]       = useState([]);
-  const [loading, setLoading]     = useState(false);
+  const [rounds, setRounds] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [loadingIdx, setLoadingIdx] = useState(-1);
-  const [error, setError]         = useState("");
+  const [error, setError] = useState("");
   const [styleNotes, setStyleNotes] = useState("");
   const [colorPref, setColorPref] = useState("");
-  const [avoid, setAvoid]         = useState("");
+  const [avoid, setAvoid] = useState("");
   const [statusMsg, setStatusMsg] = useState("");
   const [previewLogo, setPreviewLogo] = useState(null);
 
@@ -476,32 +476,32 @@ function LogoCreatorTool({ brandProfile, onOutput, selectedOutputs, onSelect }) 
 
   // Build 4 style-specific prompts using the focused buildLogoPrompt helper
   const buildPrompts = (spec = "") => {
-    const name     = selectedBrandName;
-    const industry = brandProfile?.industry        || "brand";
-    const colorMood= (colorPref || brandProfile?.colorMood) || "";
-    const aesthetic= brandProfile?.designAesthetic || "";
+    const name = selectedBrandName;
+    const industry = brandProfile?.industry || "brand";
+    const colorMood = (colorPref || brandProfile?.colorMood) || "";
+    const aesthetic = brandProfile?.designAesthetic || "";
 
     const STYLES = ["Minimal Icon", "Wordmark", "Badge / Emblem", "Abstract Mark"];
     return STYLES.map(style => ({
       style,
       prompt: buildLogoPrompt(name, industry, colorMood, aesthetic, style)
         + (styleNotes ? `, ${styleNotes}` : "")
-        + (avoid      ? `, avoid ${avoid}` : "")
-        + (spec       ? `, ${spec}` : ""),
+        + (avoid ? `, avoid ${avoid}` : "")
+        + (spec ? `, ${spec}` : ""),
     }));
   };
 
   const generate = async (spec = "") => {
     setLoading(true); setError(""); setStatusMsg(""); setPreviewLogo(null);
     const prompts = buildPrompts(spec);
-    const logos   = [];
+    const logos = [];
     try {
       for (let i = 0; i < prompts.length; i++) {
         setLoadingIdx(i);
-        setStatusMsg(`[${i+1}/4] Generating ${prompts[i].style}…`);
+        setStatusMsg(`[${i + 1}/4] Generating ${prompts[i].style}…`);
         const imageUrl = await generateLogoImage(
           prompts[i].prompt,
-          (msg) => setStatusMsg(`[${i+1}/4] ${msg}`),
+          (msg) => setStatusMsg(`[${i + 1}/4] ${msg}`),
           prompts[i].style,
           selectedBrandName,
         );
@@ -537,17 +537,17 @@ function LogoCreatorTool({ brandProfile, onOutput, selectedOutputs, onSelect }) 
       </div>
 
       {selectedBrandName ? (
-        <div style={{ display:"flex", alignItems:"center", gap:10, padding:"12px 16px", background:"rgba(124,77,255,0.07)", border:"1.5px solid rgba(124,77,255,0.2)", borderRadius:12, marginBottom:20 }}>
-          <span style={{ fontSize:20 }}>🏷️</span>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 16px", background: "rgba(124,77,255,0.07)", border: "1.5px solid rgba(124,77,255,0.2)", borderRadius: 12, marginBottom: 20 }}>
+          <span style={{ fontSize: 20 }}>🏷️</span>
           <div>
-            <div style={{ fontSize:11, fontWeight:800, color:"var(--violet)", textTransform:"uppercase", letterSpacing:"0.8px" }}>Generating logos for</div>
-            <div style={{ fontFamily:"Fredoka One", fontSize:20, color:"var(--text)" }}>{selectedBrandName}</div>
+            <div style={{ fontSize: 11, fontWeight: 800, color: "var(--violet)", textTransform: "uppercase", letterSpacing: "0.8px" }}>Generating logos for</div>
+            <div style={{ fontFamily: "Fredoka One", fontSize: 20, color: "var(--text)" }}>{selectedBrandName}</div>
           </div>
         </div>
       ) : (
-        <div style={{ display:"flex", alignItems:"center", gap:10, padding:"10px 16px", background:"rgba(255,179,0,0.06)", border:"1.5px solid rgba(255,179,0,0.22)", borderRadius:12, marginBottom:20 }}>
-          <span style={{ fontSize:16 }}>💡</span>
-          <div style={{ fontSize:13, color:"#b8860b", fontWeight:600 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 16px", background: "rgba(255,179,0,0.06)", border: "1.5px solid rgba(255,179,0,0.22)", borderRadius: 12, marginBottom: 20 }}>
+          <span style={{ fontSize: 16 }}>💡</span>
+          <div style={{ fontSize: 13, color: "#b8860b", fontWeight: 600 }}>
             Tip: Go to <strong>Brand Names</strong> tab, generate names, then hit ✓ on one — it will appear in your logos automatically.
           </div>
         </div>
@@ -642,7 +642,7 @@ function LogoCreatorTool({ brandProfile, onOutput, selectedOutputs, onSelect }) 
 
       {rounds.length > 0 && (
         <GenerateMorePanel loading={loading} onGenerate={generate}
-          chips={["More Minimal","More Bold","Different Colors","More Premium","More Playful","More Modern","Darker Theme","Lighter Theme"]} />
+          chips={["More Minimal", "More Bold", "Different Colors", "More Premium", "More Playful", "More Modern", "Darker Theme", "Lighter Theme"]} />
       )}
     </div>
   );
@@ -650,19 +650,26 @@ function LogoCreatorTool({ brandProfile, onOutput, selectedOutputs, onSelect }) 
 
 // ─── Website Generation Tool ──────────────────────────────────────────────────
 function WebsiteGenerationTool({ brandProfile, onOutput }) {
-  const [pages, setPages]   = useState("Landing Page");
-  const [style, setStyle]   = useState("Modern Minimal");
-  const [code, setCode]     = useState("");
+  const [pages, setPages] = useState("Landing Page");
+  const [style, setStyle] = useState("Modern Minimal");
+  const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState(false);
 
+  // Deployment state
+  const [deployState, setDeployState] = useState("idle"); // idle, deploying, success, error
+  const [deployData, setDeployData] = useState(null);
+  const [deployError, setDeployError] = useState("");
+
   const pageTypes = ["Landing Page", "Portfolio", "Product Page", "Coming Soon", "Agency Site"];
-  const styles    = ["Modern Minimal", "Bold & Vibrant", "Dark & Techy", "Soft & Elegant", "Brutalist"];
+  const styles = ["Modern Minimal", "Bold & Vibrant", "Dark & Techy", "Soft & Elegant", "Brutalist"];
 
   const generate = async () => {
     setLoading(true);
     setCode("");
     setPreview(false);
+    setDeployState("idle");
+    setDeployData(null);
     try {
       const { puterAI } = await import("../utils/puter");
       await puterAI(
@@ -683,6 +690,26 @@ function WebsiteGenerationTool({ brandProfile, onOutput }) {
     a.href = URL.createObjectURL(blob);
     a.download = `${(brandProfile?.brandName || "website").toLowerCase().replace(/\s/g, "-")}.html`;
     a.click();
+  };
+
+  const deployWebsite = async () => {
+    setDeployState("deploying");
+    setDeployError("");
+    try {
+      const res = await fetch("/api/deploy", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ html: code, brandName: brandProfile?.brandName || "Brand" })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Deployment failed");
+
+      setDeployData(data);
+      setDeployState("success");
+    } catch (e) {
+      setDeployError(e.message);
+      setDeployState("error");
+    }
   };
 
   return (
@@ -713,15 +740,78 @@ function WebsiteGenerationTool({ brandProfile, onOutput }) {
 
       {code && !loading && (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <style>{`
+            @keyframes loadingBar {
+              0% { left: -30%; width: 30%; }
+              50% { width: 60%; }
+              100% { left: 100%; width: 30%; }
+            }
+          `}</style>
           {/* Action bar */}
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
             <button className="btn-primary" onClick={download}>📥 Download HTML</button>
+            <button
+              className="btn-primary"
+              onClick={deployWebsite}
+              disabled={deployState === "deploying"}
+              style={{
+                background: "linear-gradient(135deg, #000, #333)",
+                color: "#fff",
+                border: "none",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.2)"
+              }}
+            >
+              {deployState === "deploying" ? "🚀 Deploying..." : "🚀 Launch Website"}
+            </button>
             <button className="btn-ghost" onClick={() => setPreview(p => !p)} style={{ fontSize: 12 }}>
               {preview ? "📝 View Code" : "👁️ Preview"}
             </button>
             <button className="btn-ghost" onClick={() => navigator.clipboard.writeText(code)} style={{ fontSize: 12 }}>📋 Copy Code</button>
             <button className="btn-ghost" onClick={generate} style={{ fontSize: 12 }}>🔄 Regenerate</button>
           </div>
+
+          {deployState === "deploying" && (
+            <div className="card" style={{ padding: "24px", textAlign: "center", background: "rgba(124,77,255,0.05)", border: "1.5px solid var(--violet)", animation: "cardIn 0.3s ease" }}>
+              <div style={{ fontSize: 28, marginBottom: 12, animation: "float 2s ease-in-out infinite" }}>🚀</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "var(--text)" }}>Deploying your site to the edge...</div>
+              <div style={{ fontSize: 13, color: "var(--text2)", marginTop: 6 }}>Creating GitHub repository and provisioning Vercel network. This takes ~10 seconds.</div>
+              <div style={{ width: 200, height: 6, background: "rgba(124,77,255,0.1)", borderRadius: 3, margin: "16px auto 0", overflow: "hidden", position: "relative" }}>
+                <div style={{ position: "absolute", top: 0, left: 0, height: "100%", background: "var(--violet)", width: "30%", animation: "loadingBar 1.5s infinite ease-in-out" }} />
+              </div>
+            </div>
+          )}
+
+          {deployState === "success" && deployData && (
+            <div className="card" style={{ padding: "24px", background: "linear-gradient(135deg, rgba(0,201,180,0.08), rgba(124,77,255,0.05))", border: "1.5px solid var(--teal)", animation: "cardIn 0.4s var(--spring)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 16 }}>
+                <div style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--teal)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, boxShadow: "0 4px 12px rgba(0,201,180,0.3)" }}>✅</div>
+                <div>
+                  <div style={{ fontSize: 17, fontWeight: 800, color: "var(--text)" }}>Website Launched Successfully!</div>
+                  <div style={{ fontSize: 13, color: "var(--text2)", marginTop: 2 }}>Your site is now live and accessible to the world.</div>
+                </div>
+              </div>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 16 }}>
+                <a href={deployData.url} target="_blank" rel="noreferrer" className="btn-primary" style={{ textDecoration: "none", background: "var(--teal)", borderColor: "var(--teal)" }}>
+                  🌍 Visit Live Website
+                </a>
+                <a href={deployData.githubUrl} target="_blank" rel="noreferrer" className="btn-ghost" style={{ textDecoration: "none" }}>
+                  📁 View Source on GitHub
+                </a>
+              </div>
+              <div style={{ fontSize: 11, color: "var(--text3)", fontFamily: "monospace", padding: "8px 12px", background: "rgba(0,0,0,0.04)", borderRadius: 8, display: "inline-flex", alignItems: "center", gap: 8 }}>
+                <span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "var(--teal)", animation: "pulse-glow 2s infinite" }} />
+                {deployData.url}
+              </div>
+            </div>
+          )}
+
+          {deployState === "error" && (
+            <div className="card" style={{ padding: "20px 24px", background: "rgba(255,107,107,0.05)", border: "1.5px solid #FF6B6B", animation: "cardIn 0.3s ease" }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "#FF6B6B", marginBottom: 8, display: "flex", alignItems: "center", gap: 8 }}><span>❌</span> Deployment Failed</div>
+              <div style={{ fontSize: 13, color: "var(--text)", fontFamily: "monospace", background: "rgba(255,107,107,0.1)", padding: "10px 14px", borderRadius: 8, whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: 1.5 }}>{deployError}</div>
+              <button className="btn-ghost btn-sm" onClick={deployWebsite} style={{ marginTop: 14 }}>🔄 Try Again</button>
+            </div>
+          )}
 
           {preview ? (
             <div style={{ borderRadius: 16, overflow: "hidden", border: "1.5px solid var(--border)", height: 500 }}>
@@ -767,7 +857,7 @@ function MissionVisionTool({ brandProfile, onOutput }) {
         setRounds(r => [...r, { ...result, spec, round: r.length + 1 }]);
         onOutput("Mission & Vision", result.punchline || result.mission);
       }
-    } catch {}
+    } catch { }
     setLoading(false);
   };
 
@@ -821,10 +911,10 @@ export function BrandIdentityPage({ brandProfile, onOutput, favorites, onFavorit
   const [activeTool, setActiveTool] = useState("names");
 
   const tools = [
-    { id: "names",   emoji: "✨", label: "Brand Names" },
-    { id: "logo",    emoji: "🎯", label: "Logo Creator" },
-    { id: "colors",  emoji: "🎨", label: "Color Palette" },
-    { id: "fonts",   emoji: "🖋️", label: "Typography" },
+    { id: "names", emoji: "✨", label: "Brand Names" },
+    { id: "logo", emoji: "🎯", label: "Logo Creator" },
+    { id: "colors", emoji: "🎨", label: "Color Palette" },
+    { id: "fonts", emoji: "🖋️", label: "Typography" },
     { id: "mission", emoji: "🧭", label: "Mission & Vision" },
     { id: "website", emoji: "🌐", label: "Website Gen" },
   ];
@@ -835,10 +925,10 @@ export function BrandIdentityPage({ brandProfile, onOutput, favorites, onFavorit
       desc="Build the visual and verbal foundation of your brand."
       tools={tools} activeId={activeTool} onSetActive={setActiveTool}
     >
-      {activeTool === "names"   && <BrandNamesTool brandProfile={brandProfile} onOutput={onOutput} favorites={favorites} onFavorite={onFavorite} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
-      {activeTool === "logo"    && <LogoCreatorTool brandProfile={brandProfile} onOutput={onOutput} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
-      {activeTool === "colors"  && <ColorPaletteTool brandProfile={brandProfile} onOutput={onOutput} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
-      {activeTool === "fonts"   && <FontPairingTool brandProfile={brandProfile} onOutput={onOutput} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
+      {activeTool === "names" && <BrandNamesTool brandProfile={brandProfile} onOutput={onOutput} favorites={favorites} onFavorite={onFavorite} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
+      {activeTool === "logo" && <LogoCreatorTool brandProfile={brandProfile} onOutput={onOutput} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
+      {activeTool === "colors" && <ColorPaletteTool brandProfile={brandProfile} onOutput={onOutput} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
+      {activeTool === "fonts" && <FontPairingTool brandProfile={brandProfile} onOutput={onOutput} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
       {activeTool === "mission" && <MissionVisionTool brandProfile={brandProfile} onOutput={onOutput} />}
       {activeTool === "website" && <WebsiteGenerationTool brandProfile={brandProfile} onOutput={onOutput} />}
     </PageShell>

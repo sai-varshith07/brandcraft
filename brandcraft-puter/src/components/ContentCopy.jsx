@@ -23,7 +23,7 @@ function AdCopyTool({ brandProfile, onOutput, favorites, onFavorite, selectedOut
         setRounds(r => [...r, { ads: result.ads, spec, round: r.length + 1 }]);
         onOutput("Ad Copy", result.ads[0]?.headline);
       }
-    } catch {}
+    } catch { }
     setLoading(false);
   };
 
@@ -35,10 +35,10 @@ function AdCopyTool({ brandProfile, onOutput, favorites, onFavorite, selectedOut
       </div>
       <div style={{ display: "flex", gap: 12, marginBottom: 20, flexWrap: "wrap" }}>
         <select className="select-base" style={{ width: "auto", minWidth: 160 }} value={platform} onChange={e => setPlatform(e.target.value)}>
-          {["Instagram","Facebook","Google","LinkedIn","TikTok"].map(p => <option key={p}>{p}</option>)}
+          {["Instagram", "Facebook", "Google", "LinkedIn", "TikTok"].map(p => <option key={p}>{p}</option>)}
         </select>
         <select className="select-base" style={{ width: "auto", minWidth: 160 }} value={goal} onChange={e => setGoal(e.target.value)}>
-          {["Awareness","Engagement","Conversion"].map(g => <option key={g}>{g}</option>)}
+          {["Awareness", "Engagement", "Conversion"].map(g => <option key={g}>{g}</option>)}
         </select>
         <button className="btn-primary" onClick={() => generate()} disabled={loading}>
           {loading ? "Generating…" : "Generate Ad Copy"}
@@ -68,7 +68,7 @@ function AdCopyTool({ brandProfile, onOutput, favorites, onFavorite, selectedOut
       ))}
       {rounds.length > 0 && (
         <GenerateMorePanel loading={loading} onGenerate={generate}
-          chips={["More Urgent","More Casual","Shorter","Longer","Funnier","More Direct","Different Angle"]} />
+          chips={["More Urgent", "More Casual", "Shorter", "Longer", "Funnier", "More Direct", "Different Angle"]} />
       )}
     </div>
   );
@@ -91,7 +91,7 @@ function SocialBioTool({ brandProfile, onOutput, favorites, onFavorite, selected
         setRounds(r => [...r, { bios: result.bios, spec, round: r.length + 1 }]);
         onOutput("Social Bio", result.bios[0]?.text);
       }
-    } catch {}
+    } catch { }
     setLoading(false);
   };
 
@@ -103,7 +103,7 @@ function SocialBioTool({ brandProfile, onOutput, favorites, onFavorite, selected
       </div>
       <div style={{ display: "flex", gap: 12, marginBottom: 20, flexWrap: "wrap" }}>
         <select className="select-base" style={{ width: "auto", minWidth: 160 }} value={platform} onChange={e => setPlatform(e.target.value)}>
-          {["Instagram","Twitter","LinkedIn","TikTok","YouTube"].map(p => <option key={p}>{p}</option>)}
+          {["Instagram", "Twitter", "LinkedIn", "TikTok", "YouTube"].map(p => <option key={p}>{p}</option>)}
         </select>
         <button className="btn-primary" onClick={() => generate()} disabled={loading}>
           {loading ? "Generating…" : "Generate Bios"}
@@ -134,7 +134,7 @@ function SocialBioTool({ brandProfile, onOutput, favorites, onFavorite, selected
       ))}
       {rounds.length > 0 && (
         <GenerateMorePanel loading={loading} onGenerate={generate}
-          chips={["Add Emoji","Remove Emoji","More Punchy","More Professional","Add CTA","Shorter","Funnier"]} />
+          chips={["Add Emoji", "Remove Emoji", "More Punchy", "More Professional", "Add CTA", "Shorter", "Funnier"]} />
       )}
     </div>
   );
@@ -173,7 +173,7 @@ function EmailBuilderTool({ brandProfile, onOutput, selectedOutputs, onSelect, s
       return;
     }
     const selectedEmails = rounds.filter((_, i) => selectedIds.includes(i));
-    
+
     try {
       console.log("Calling Gmail MCP (https://gmail.mcp.claude.com/mcp) with payload:", {
         action: "forward",
@@ -181,7 +181,7 @@ function EmailBuilderTool({ brandProfile, onOutput, selectedOutputs, onSelect, s
         targetEmail,
         rule: redirectRule
       });
-      
+
       fetch("https://gmail.mcp.claude.com/mcp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -219,15 +219,15 @@ No markdown, no code blocks, no explanation. Just the JSON object.`,
       // Robustly extract subject/preheader/body wherever they may be nested
       const email = result.subject ? result
         : result.email?.subject ? result.email
-        : result.data?.subject ? result.data
-        : null;
+          : result.data?.subject ? result.data
+            : null;
 
       if (email?.subject) {
         setRounds(prev => {
           const newRound = {
-            subject:   email.subject,
+            subject: email.subject,
             preheader: email.preheader || "",
-            body:      email.body || "",
+            body: email.body || "",
             type,
             spec,
             round: prev.length + 1,
@@ -262,10 +262,10 @@ No markdown, no code blocks, no explanation. Just the JSON object.`,
       )}
 
       {error && <div style={{ padding: "12px 16px", background: "rgba(255,107,107,0.1)", border: "1px solid rgba(255,107,107,0.3)", borderRadius: 8, marginBottom: 20, color: "#FF6B6B", fontSize: 14 }}>⚠️ {error}</div>}
-      
+
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 20 }}>
         <select className="select-base" style={{ width: "auto", minWidth: 180 }} value={type} onChange={e => setType(e.target.value)}>
-          {["Welcome","Promotional","Newsletter","Follow-up","Abandoned Cart"].map(t => <option key={t}>{t}</option>)}
+          {["Welcome", "Promotional", "Newsletter", "Follow-up", "Abandoned Cart"].map(t => <option key={t}>{t}</option>)}
         </select>
         <button className="btn-primary" onClick={() => generate()} disabled={loading}>
           {loading ? "Generating…" : "Generate Email"}
@@ -293,7 +293,7 @@ No markdown, no code blocks, no explanation. Just the JSON object.`,
       )}
 
       {loading && <SkeletonCard lines={8} />}
-      
+
       {rounds.map((round, ri) => (
         <div key={ri} style={{ marginBottom: 24 }}>
           <div className="round-label" style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }} onClick={() => toggleSelect(ri)}>
@@ -315,7 +315,7 @@ No markdown, no code blocks, no explanation. Just the JSON object.`,
       ))}
       {rounds.length > 0 && (
         <GenerateMorePanel loading={loading} onGenerate={generate}
-          chips={["More Formal","More Friendly","Add Urgency","Shorter","Add Offer","Catchier Subject","Add PS"]} />
+          chips={["More Formal", "More Friendly", "Add Urgency", "Shorter", "Add Offer", "Catchier Subject", "Add PS"]} />
       )}
     </div>
   );
@@ -340,7 +340,7 @@ function ContentCalendarTool({ brandProfile, onOutput, selectedOutputs, onSelect
         setRounds(r => [...r, { calendar: result.calendar, spec, round: r.length + 1 }]);
         onOutput("Content Calendar", result.calendar[0]?.idea);
       }
-    } catch {}
+    } catch { }
     setLoading(false);
   };
 
@@ -353,10 +353,10 @@ function ContentCalendarTool({ brandProfile, onOutput, selectedOutputs, onSelect
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 20 }}>
         <input className="input-base" placeholder="Campaign or topic idea..." value={topic} onChange={e => setTopic(e.target.value)} style={{ flex: 1, minWidth: 200 }} />
         <select className="select-base" style={{ width: "auto", minWidth: 120 }} value={contentType} onChange={e => setContentType(e.target.value)}>
-          {["Post","Thread","Story","Reel Script"].map(t => <option key={t}>{t}</option>)}
+          {["Post", "Thread", "Story", "Reel Script"].map(t => <option key={t}>{t}</option>)}
         </select>
         <select className="select-base" style={{ width: "auto", minWidth: 120 }} value={frequency} onChange={e => setFrequency(e.target.value)}>
-          {["Daily","3x Week","Weekly"].map(f => <option key={f}>{f}</option>)}
+          {["Daily", "3x Week", "Weekly"].map(f => <option key={f}>{f}</option>)}
         </select>
         <button className="btn-primary" onClick={() => generate()} disabled={loading}>
           {loading ? "Generating…" : "Generate Calendar"}
@@ -373,7 +373,7 @@ function ContentCalendarTool({ brandProfile, onOutput, selectedOutputs, onSelect
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
               <thead>
                 <tr style={{ background: "var(--bg2)" }}>
-                  {["Day","Platform","Post Idea","Hashtags"].map(h => (
+                  {["Day", "Platform", "Post Idea", "Hashtags"].map(h => (
                     <th key={h} style={{ padding: "12px 14px", textAlign: "left", color: "var(--text2)", fontWeight: 700, fontSize: 11, textTransform: "uppercase", letterSpacing: "0.05em", borderBottom: "1px solid var(--border)" }}>{h}</th>
                   ))}
                 </tr>
@@ -387,7 +387,7 @@ function ContentCalendarTool({ brandProfile, onOutput, selectedOutputs, onSelect
                     <td style={{ padding: "12px 14px" }}>
                       <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
                         {(row.hashtags || []).slice(0, 3).map(h => (
-                          <span key={h} style={{ padding: "2px 8px", background: "var(--teal-glow)", border: "1px solid var(--teal)", borderRadius: 4, color: "var(--teal)", fontSize: 11, fontWeight: 600 }}>#{h.replace("#","")}</span>
+                          <span key={h} style={{ padding: "2px 8px", background: "var(--teal-glow)", border: "1px solid var(--teal)", borderRadius: 4, color: "var(--teal)", fontSize: 11, fontWeight: 600 }}>#{h.replace("#", "")}</span>
                         ))}
                       </div>
                     </td>
@@ -400,7 +400,7 @@ function ContentCalendarTool({ brandProfile, onOutput, selectedOutputs, onSelect
       ))}
       {rounds.length > 0 && (
         <GenerateMorePanel loading={loading} onGenerate={generate}
-          chips={["Different Platforms","More Variety","Focus on Reels","Add Stories","More Hashtags","Product Launch Focus"]} />
+          chips={["Different Platforms", "More Variety", "Focus on Reels", "Add Stories", "More Hashtags", "Product Launch Focus"]} />
       )}
     </div>
   );
@@ -409,11 +409,11 @@ function ContentCalendarTool({ brandProfile, onOutput, selectedOutputs, onSelect
 // ─── Post Mockup Tool ──────────────────────────────────────────────────────────
 function PostMockupTool({ brandProfile, onOutput }) {
   const [platform, setPlatform] = useState("Instagram");
-  const [caption, setCaption]   = useState("");
+  const [caption, setCaption] = useState("");
   const [hashtags, setHashtags] = useState("");
-  const [bgColor, setBgColor]   = useState("#7C4DFF");
+  const [bgColor, setBgColor] = useState("#7C4DFF");
   const [textColor, setTextColor] = useState("#ffffff");
-  const [loading, setLoading]   = useState(false);
+  const [loading, setLoading] = useState(false);
   const mockRef = useRef(null);
 
   const platforms = {
@@ -437,7 +437,7 @@ function PostMockupTool({ brandProfile, onOutput }) {
       if (data.caption) setCaption(data.caption);
       if (data.hashtags) setHashtags(data.hashtags);
       onOutput?.("Post Mockup", data.caption?.slice(0, 60));
-    } catch {}
+    } catch { }
     setLoading(false);
   };
 
@@ -447,7 +447,7 @@ function PostMockupTool({ brandProfile, onOutput }) {
       const { default: html2canvas } = await import("html2canvas");
       const canvas = await html2canvas(mockRef.current, { scale: 2 });
       const a = document.createElement("a");
-      a.download = `${platform.replace(/\//g,"-").toLowerCase()}-post.png`;
+      a.download = `${platform.replace(/\//g, "-").toLowerCase()}-post.png`;
       a.href = canvas.toDataURL("image/png");
       a.click();
     } catch { alert("Download requires html2canvas. Run: npm install html2canvas"); }
@@ -549,8 +549,8 @@ function PostMockupTool({ brandProfile, onOutput }) {
 
 // ─── Content Automation Tool ──────────────────────────────────────────────────
 function ContentAutomationTool({ brandProfile, onOutput }) {
-  const [goal, setGoal]     = useState("Product Launch");
-  const [weeks, setWeeks]   = useState(4);
+  const [goal, setGoal] = useState("Product Launch");
+  const [weeks, setWeeks] = useState(4);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -582,12 +582,12 @@ function ContentAutomationTool({ brandProfile, onOutput }) {
       );
       setResult(data);
       onOutput?.("Content Automation", `${data.campaignName} — ${weeks}w`);
-    } catch {}
+    } catch { }
     setLoading(false);
   };
 
   const platformColor = { "Instagram": "#E1306C", "Twitter/X": "#000", "LinkedIn": "#0A66C2", "TikTok": "#000", "Facebook": "#1877F2", "YouTube": "#FF0000" };
-  const typeColor     = { "Reel": "#E1306C", "Story": "#FF6B00", "Post": "#7C4DFF", "Tweet": "#1DA1F2", "Article": "#0A66C2", "Short": "#FF0000" };
+  const typeColor = { "Reel": "#E1306C", "Story": "#FF6B00", "Post": "#7C4DFF", "Tweet": "#1DA1F2", "Article": "#0A66C2", "Short": "#FF0000" };
 
   return (
     <div>
@@ -668,18 +668,102 @@ function ContentAutomationTool({ brandProfile, onOutput }) {
   );
 }
 
+// ─── Lead Magnet Generator ───────────────────────────────────────────────────
+function LeadMagnetTool({ brandProfile, onOutput, selectedOutputs, onSelect }) {
+  const [topic, setTopic] = useState("");
+  const [format, setFormat] = useState("E-Book / Guide");
+  const [rounds, setRounds] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const generate = async (spec = "") => {
+    setLoading(true);
+    try {
+      const result = await callAIJSON(
+        "You are an expert conversion copywriter. Return JSON: {ideas: [{title: string, hook: string, outline: string[], callToAction: string}]}",
+        `Brand: ${JSON.stringify(brandProfile || {})}. Topic/Niche: ${topic || "general"}. Format: ${format}. ${spec || "Generate 2 high-converting lead magnet concepts."}`
+      );
+      if (result.ideas) {
+        setRounds(r => [...r, { ideas: result.ideas, spec, round: r.length + 1 }]);
+        onOutput("Lead Magnet", result.ideas[0]?.title);
+      }
+    } catch { }
+    setLoading(false);
+  };
+
+  return (
+    <div>
+      <div style={{ marginBottom: 24 }}>
+        <h2 style={{ fontSize: 22, fontWeight: 800, color: "var(--text)", marginBottom: 4 }}>🧲 Lead Magnet Generator</h2>
+        <p style={{ color: "var(--text2)", fontSize: 14 }}>Create irresistible freebies to capture emails and grow your audience.</p>
+      </div>
+
+      <div style={{ display: "flex", gap: 12, marginBottom: 20, flexWrap: "wrap" }}>
+        <input className="input-base" placeholder="Topic or pain point..." value={topic} onChange={e => setTopic(e.target.value)} style={{ flex: 1, minWidth: 200 }} />
+        <select className="select-base" style={{ width: "auto", minWidth: 160 }} value={format} onChange={e => setFormat(e.target.value)}>
+          {["E-Book / Guide", "Checklist / Cheat Sheet", "Email Course", "Quiz / Assessment", "Resource Library", "Webinar / Video Training"].map(f => <option key={f}>{f}</option>)}
+        </select>
+        <button className="btn-primary" onClick={() => generate()} disabled={loading}>
+          {loading ? "Generating…" : "Generate Ideas"}
+        </button>
+      </div>
+
+      {loading && <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>{[...Array(2)].map((_, i) => <SkeletonCard key={i} lines={5} />)}</div>}
+
+      {rounds.map((round, ri) => (
+        <div key={ri} style={{ marginBottom: 24 }}>
+          <div className="round-label">Round {round.round} · {format}</div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            {round.ideas.map((idea, i) => {
+              const id = `leadmagnet-${ri}-${i}`;
+              return (
+                <div key={i} className="card output-card" style={{ padding: "20px 24px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12 }}>
+                    <div style={{ fontSize: 11, color: "var(--teal)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px" }}>Idea {i + 1}</div>
+                    <OutputActions text={`${idea.title}\n\n${idea.hook}\n\nOutline:\n${idea.outline?.join('\n')}\n\nCTA: ${idea.callToAction}`} onSelect={onSelect} selected={selectedOutputs["Lead Magnet"]?.id === id} feature="Lead Magnet" id={id} />
+                  </div>
+                  <div style={{ fontFamily: "Fredoka One", fontSize: 20, color: "var(--text)", marginBottom: 8 }}>{idea.title}</div>
+                  <p style={{ fontSize: 14, color: "var(--text2)", lineHeight: 1.6, marginBottom: 16, fontStyle: "italic" }}>"{idea.hook}"</p>
+
+                  <div style={{ background: "rgba(124,77,255,0.04)", borderRadius: 12, padding: "14px 18px", border: "1px solid var(--border)", marginBottom: 16 }}>
+                    <div style={{ fontSize: 11, fontWeight: 800, color: "var(--violet)", marginBottom: 8, textTransform: "uppercase" }}>Content Outline</div>
+                    <ul style={{ margin: 0, paddingLeft: 18, color: "var(--text)", fontSize: 13, lineHeight: 1.6 }}>
+                      {(idea.outline || []).map((item, idx) => (
+                        <li key={idx} style={{ marginBottom: 4 }}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 14px", background: "var(--teal-glow)", border: "1px solid var(--teal)", borderRadius: 8, fontSize: 13, color: "var(--teal)", fontWeight: 700 }}>
+                    <span>🎯 CTA:</span> {idea.callToAction}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+
+      {rounds.length > 0 && (
+        <GenerateMorePanel loading={loading} onGenerate={generate}
+          chips={["More Actionable", "Focus on Beginners", "Make it Shorter", "Different Format", "More Specific Hook"]} />
+      )}
+    </div>
+  );
+}
+
 // ─── Content Copy Page ─────────────────────────────────────────────────────────
 export function ContentCopyPage({ brandProfile, onOutput, favorites, onFavorite, selectedOutputs, onSelect, toolOutputs, saveToolOutput, getToolOutputs }) {
   const [activeTool, setActiveTool] = useState("ads");
 
   const tools = [
-    { id: "ad-gen",     emoji: "🎯", label: "Ad Generator" },
-    { id: "ads",        emoji: "📣", label: "Ad Copy" },
-    { id: "bio",        emoji: "🌟", label: "Social Bio" },
-    { id: "email",      emoji: "💌", label: "Email Builder" },
-    { id: "calendar",   emoji: "📅", label: "Content Calendar" },
-    { id: "mockup",     emoji: "🖼️", label: "Post Mockup" },
+    { id: "ad-gen", emoji: "🎯", label: "Ad Generator" },
+    { id: "ads", emoji: "📣", label: "Ad Copy" },
+    { id: "bio", emoji: "🌟", label: "Social Bio" },
+    { id: "email", emoji: "💌", label: "Email Builder" },
+    { id: "calendar", emoji: "📅", label: "Content Calendar" },
+    { id: "mockup", emoji: "🖼️", label: "Post Mockup" },
     { id: "automation", emoji: "🤖", label: "Content Auto" },
+    { id: "magnet", emoji: "🧲", label: "Lead Magnet" },
   ];
 
   return (
@@ -688,13 +772,14 @@ export function ContentCopyPage({ brandProfile, onOutput, favorites, onFavorite,
       desc="AI-powered content that sounds like you, scales like a team."
       tools={tools} activeId={activeTool} onSetActive={setActiveTool}
     >
-      {activeTool === "ad-gen"     && <AdvertisementGeneratorTool brandProfile={brandProfile} onOutput={onOutput} favorites={favorites} onFavorite={onFavorite} />}
-      {activeTool === "ads"        && <AdCopyTool brandProfile={brandProfile} onOutput={onOutput} favorites={favorites} onFavorite={onFavorite} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
-      {activeTool === "bio"        && <SocialBioTool brandProfile={brandProfile} onOutput={onOutput} favorites={favorites} onFavorite={onFavorite} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
-      {activeTool === "email"      && <EmailBuilderTool brandProfile={brandProfile} onOutput={onOutput} selectedOutputs={selectedOutputs} onSelect={onSelect} saveToolOutput={saveToolOutput} getToolOutputs={getToolOutputs} />}
-      {activeTool === "calendar"   && <ContentCalendarTool brandProfile={brandProfile} onOutput={onOutput} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
-      {activeTool === "mockup"     && <PostMockupTool brandProfile={brandProfile} onOutput={onOutput} />}
+      {activeTool === "ad-gen" && <AdvertisementGeneratorTool brandProfile={brandProfile} onOutput={onOutput} favorites={favorites} onFavorite={onFavorite} />}
+      {activeTool === "ads" && <AdCopyTool brandProfile={brandProfile} onOutput={onOutput} favorites={favorites} onFavorite={onFavorite} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
+      {activeTool === "bio" && <SocialBioTool brandProfile={brandProfile} onOutput={onOutput} favorites={favorites} onFavorite={onFavorite} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
+      {activeTool === "email" && <EmailBuilderTool brandProfile={brandProfile} onOutput={onOutput} selectedOutputs={selectedOutputs} onSelect={onSelect} saveToolOutput={saveToolOutput} getToolOutputs={getToolOutputs} />}
+      {activeTool === "calendar" && <ContentCalendarTool brandProfile={brandProfile} onOutput={onOutput} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
+      {activeTool === "mockup" && <PostMockupTool brandProfile={brandProfile} onOutput={onOutput} />}
       {activeTool === "automation" && <ContentAutomationTool brandProfile={brandProfile} onOutput={onOutput} />}
+      {activeTool === "magnet" && <LeadMagnetTool brandProfile={brandProfile} onOutput={onOutput} selectedOutputs={selectedOutputs} onSelect={onSelect} />}
     </PageShell>
   );
 }
@@ -718,23 +803,23 @@ function AdvertisementGeneratorTool({ brandProfile, onOutput, favorites, onFavor
     if (!productName || !targetAudience) return;
     setLoading(true);
     setVariations([]);
-    
+
     // Simulating Anthropic API call (claude-sonnet-4-20250514)
     try {
       console.log("Calling Anthropic API (claude-sonnet-4-20250514) with:", { productName, targetAudience, tone, format });
-      
+
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       const prompt = `Generate 3 ad variations for ${productName} targeting ${targetAudience} in a ${tone} tone. Format: ${format}.`;
-      
+
       // We will fallback to the existing internal logic just to populate realistic data if possible
       // but we explicitly label this as "Anthropic generation" for the prompt constraints
       const result = await callAIJSON(
         "You are Claude (claude-sonnet-4-20250514), an AI assistant by Anthropic. Return exactly 3 ad copy variations as a JSON array of strings under the key 'ads'.",
         prompt
       );
-      
+
       if (result && result.ads && Array.isArray(result.ads)) {
         setVariations(result.ads);
         onOutput("Ad Generator", result.ads[0]);
@@ -751,17 +836,17 @@ function AdvertisementGeneratorTool({ brandProfile, onOutput, favorites, onFavor
       console.error(e);
       showToast("Error calling Anthropic API");
     }
-    
+
     setLoading(false);
   };
 
   return (
     <div>
       <div style={{ marginBottom: 24 }}>
-        <h2 style={{ fontSize: 22, fontWeight: 800, color: "var(--text)", marginBottom: 4 }}>🎯 Ad Generator <span style={{fontSize: 12, background: 'var(--violet-soft)', color: 'var(--violet)', padding: '2px 8px', borderRadius: 12}}>Powered by Claude 4</span></h2>
+        <h2 style={{ fontSize: 22, fontWeight: 800, color: "var(--text)", marginBottom: 4 }}>🎯 Ad Generator <span style={{ fontSize: 12, background: 'var(--violet-soft)', color: 'var(--violet)', padding: '2px 8px', borderRadius: 12 }}>Powered by Claude 4</span></h2>
         <p style={{ color: "var(--text2)", fontSize: 14 }}>Create highly targeted advertisements with Anthropic's Claude.</p>
       </div>
-      
+
       {toast && (
         <div style={{ padding: "12px 20px", background: "var(--teal)", color: "#fff", borderRadius: 8, marginBottom: 20, fontWeight: 700, animation: "panelIn 0.3s ease" }}>
           ✅ {toast}
@@ -802,7 +887,7 @@ function AdvertisementGeneratorTool({ brandProfile, onOutput, favorites, onFavor
       </div>
 
       {loading && <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>{[...Array(3)].map((_, i) => <SkeletonCard key={i} lines={3} />)}</div>}
-      
+
       {variations.length > 0 && !loading && (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <div style={{ fontWeight: 800, color: "var(--violet)", fontSize: 14 }}>Generated Variations</div>
@@ -836,4 +921,3 @@ function AdvertisementGeneratorTool({ brandProfile, onOutput, favorites, onFavor
     </div>
   );
 }
-

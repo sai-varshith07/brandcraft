@@ -13,9 +13,9 @@ async function smartAIJSON(sys, user) {
 
 // ─── Domain Checker ───────────────────────────────────────────────────────────
 function DomainCheckerTool({ brandProfile }) {
-  const [query, setQuery]       = useState(brandProfile?.brandName || "");
-  const [results, setResults]   = useState(null);
-  const [loading, setLoading]   = useState(false);
+  const [query, setQuery] = useState(brandProfile?.brandName || "");
+  const [results, setResults] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const check = async () => {
     if (!query.trim()) return;
@@ -36,7 +36,7 @@ function DomainCheckerTool({ brandProfile }) {
         `Brand/keyword: "${query}". Business context: ${JSON.stringify(brandProfile || {})}`
       );
       setResults(data);
-    } catch {}
+    } catch { }
     setLoading(false);
   };
 
@@ -136,15 +136,15 @@ function DomainCheckerTool({ brandProfile }) {
 // ─── Steal This Brand ─────────────────────────────────────────────────────────
 function StealThisBrandTool({ brandProfile }) {
   const [competitor, setCompetitor] = useState("");
-  const [result, setResult]         = useState(null);
-  const [loading, setLoading]       = useState(false);
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const analyze = async () => {
     if (!competitor.trim()) return;
     setLoading(true);
     try {
       const isUrlOrImage = competitor.startsWith("http");
-      
+
       const data = await smartAIJSON(
         `You are a brand strategist. Analyze the given competitor brand name, website URL, or image reference. Deduce their visual style (colors/fonts) and ideology. Return JSON:
 {
@@ -165,7 +165,7 @@ function StealThisBrandTool({ brandProfile }) {
         `Competitor Source: "${competitor}". My brand context: ${JSON.stringify(brandProfile || {})}. Note: if source is a URL/Image, vividly extrapolate their visual aesthetics and ideology based on what that entity generally represents online.`
       );
       setResult(data);
-    } catch {}
+    } catch { }
     setLoading(false);
   };
 
@@ -253,8 +253,8 @@ function StealThisBrandTool({ brandProfile }) {
 
 // ─── Brand Story ──────────────────────────────────────────────────────────────
 function BrandStoryTool({ brandProfile, onOutput }) {
-  const [style, setStyle]   = useState("Origin Story");
-  const [story, setStory]   = useState("");
+  const [style, setStyle] = useState("Origin Story");
+  const [story, setStory] = useState("");
   const [loading, setLoading] = useState(false);
 
   const styles = ["Origin Story", "Problem-Solution", "Hero's Journey", "Why We Exist", "Vision Letter", "Manifesto"];
@@ -343,7 +343,7 @@ function MarketResearchTool({ brandProfile, onOutput }) {
       );
       setReport(data);
       onOutput?.("Market Research", `Research for: ${topic}`);
-    } catch {}
+    } catch { }
     setLoading(false);
   };
 
@@ -384,7 +384,7 @@ function MarketResearchTool({ brandProfile, onOutput }) {
               <div style={{ fontSize: 12, fontWeight: 800, color: "var(--violet)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 12 }}>🌍 Market Size Estimate</div>
               <p style={{ fontSize: 14, color: "var(--text2)", lineHeight: 1.6 }}>{report.marketSize}</p>
             </div>
-            
+
             {/* Key Trends */}
             <div className="card" style={{ padding: "20px 24px" }}>
               <div style={{ fontSize: 12, fontWeight: 800, color: "var(--pink)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 12 }}>🔥 Emerging Trends</div>
@@ -415,15 +415,87 @@ function MarketResearchTool({ brandProfile, onOutput }) {
   );
 }
 
+// ─── Growth Hacker ───────────────────────────────────────────────────────────
+function GrowthHackerTool({ brandProfile, onOutput }) {
+  const [goal, setGoal] = useState("User Acquisition");
+  const [strategies, setStrategies] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const generate = async () => {
+    setLoading(true);
+    try {
+      const data = await smartAIJSON(
+        `You are an elite growth hacker. Generate 3 unconventional, highly effective growth hacking strategies. Return JSON:
+{
+  "strategies": [
+    { "name": "<catchy strategy name>", "description": "<how it works in 2 sentences>", "difficulty": "Low|Medium|High", "impact": "Medium|High|Massive", "steps": ["<step 1>", "<step 2>", "<step 3>"] }
+  ]
+}`,
+        `Brand: ${JSON.stringify(brandProfile || {})}. Goal: ${goal}. Focus on creative, low-budget, high-impact growth tactics.`
+      );
+      setStrategies(data.strategies);
+      onOutput?.("Growth Hacker", data.strategies?.[0]?.name);
+    } catch { }
+    setLoading(false);
+  };
+
+  return (
+    <div>
+      <div style={{ marginBottom: 24 }}>
+        <h2 style={{ fontSize: 22, fontWeight: 800, color: "var(--text)", marginBottom: 4 }}>🚀 Growth Hacker</h2>
+        <p style={{ color: "var(--text2)", fontSize: 14 }}>Unconventional tactics to scale your brand fast.</p>
+      </div>
+
+      <div style={{ display: "flex", gap: 12, marginBottom: 24, flexWrap: "wrap" }}>
+        <select className="select-base" style={{ flex: 1, minWidth: 200 }} value={goal} onChange={e => setGoal(e.target.value)}>
+          {["User Acquisition", "Viral Word-of-Mouth", "Retention & Loyalty", "Revenue Expansion", "Social Media Explosive Growth"].map(g => <option key={g}>{g}</option>)}
+        </select>
+        <button className="btn-primary" onClick={generate} disabled={loading}>
+          {loading ? "Hacking Growth…" : "Generate Strategies"}
+        </button>
+      </div>
+
+      {loading && <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>{[...Array(3)].map((_, i) => <SkeletonCard key={i} lines={3} />)}</div>}
+
+      {strategies && !loading && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          {strategies.map((s, i) => (
+            <div key={i} className="card" style={{ padding: "20px 24px", borderLeft: `4px solid ${i % 2 === 0 ? "var(--teal)" : "var(--pink)"}` }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10, flexWrap: "wrap", gap: 10 }}>
+                <div style={{ fontFamily: "Fredoka One", fontSize: 18, color: "var(--text)" }}>{s.name}</div>
+                <div style={{ display: "flex", gap: 8 }}>
+                  <span style={{ fontSize: 10, fontWeight: 800, padding: "3px 8px", borderRadius: 6, background: "var(--bg2)", color: "var(--text2)", border: "1px solid var(--border)" }}>Diff: {s.difficulty}</span>
+                  <span style={{ fontSize: 10, fontWeight: 800, padding: "3px 8px", borderRadius: 6, background: "var(--teal-glow)", color: "var(--teal)", border: "1px solid var(--teal)" }}>Impact: {s.impact}</span>
+                </div>
+              </div>
+              <p style={{ fontSize: 14, color: "var(--text2)", lineHeight: 1.6, marginBottom: 14 }}>{s.description}</p>
+              <div style={{ fontSize: 12, fontWeight: 800, color: "var(--text3)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 8 }}>Action Plan</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {(s.steps || []).map((step, si) => (
+                  <div key={si} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                    <div style={{ width: 20, height: 20, borderRadius: "50%", background: "var(--violet-soft)", color: "var(--violet)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 800, flexShrink: 0, marginTop: 2 }}>{si + 1}</div>
+                    <div style={{ fontSize: 13, color: "var(--text)" }}>{step}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Discover Page ─────────────────────────────────────────────────────────────
 export function DiscoverPage({ brandProfile, onOutput }) {
   const [tool, setTool] = useState("domain");
 
   const tools = [
-    { id: "domain",     label: "Domain Checker",    emoji: "🌐" },
-    { id: "steal",      label: "Steal This Brand",  emoji: "🕵️" },
-    { id: "story",      label: "Brand Story",       emoji: "📖" },
-    { id: "market",     label: "Market Research",   emoji: "📈" },
+    { id: "domain", label: "Domain Checker", emoji: "🌐" },
+    { id: "steal", label: "Steal This Brand", emoji: "🕵️" },
+    { id: "story", label: "Brand Story", emoji: "📖" },
+    { id: "market", label: "Market Research", emoji: "📈" },
+    { id: "growth", label: "Growth Hacker", emoji: "🚀" },
   ];
 
   return (
@@ -446,9 +518,10 @@ export function DiscoverPage({ brandProfile, onOutput }) {
       </div>
 
       {tool === "domain" && <DomainCheckerTool brandProfile={brandProfile} />}
-      {tool === "steal"  && <StealThisBrandTool brandProfile={brandProfile} />}
-      {tool === "story"  && <BrandStoryTool brandProfile={brandProfile} onOutput={onOutput} />}
+      {tool === "steal" && <StealThisBrandTool brandProfile={brandProfile} />}
+      {tool === "story" && <BrandStoryTool brandProfile={brandProfile} onOutput={onOutput} />}
       {tool === "market" && <MarketResearchTool brandProfile={brandProfile} onOutput={onOutput} />}
+      {tool === "growth" && <GrowthHackerTool brandProfile={brandProfile} onOutput={onOutput} />}
     </PageShell>
   );
 }

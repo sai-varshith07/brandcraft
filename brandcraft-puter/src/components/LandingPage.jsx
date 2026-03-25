@@ -10,7 +10,7 @@ function MagicBurst({ onDone }) {
     y: 5 + (i * 17.3) % 88,
     size: 18 + (i % 4) * 10,
     delay: (i * 0.038),
-    emoji: ["✨","⭐","🌟","💫","✦","❋","🔆"][i % 7],
+    emoji: ["✨", "⭐", "🌟", "💫", "✦", "❋", "🔆"][i % 7],
     tx: ((i % 7) - 3) * 28,
     ty: ((i % 5) - 2) * 28,
     rot: i * 47,
@@ -45,21 +45,23 @@ function MagicBurst({ onDone }) {
           to   { opacity: 1; transform: translateY(0) scale(1); }
         }
       `}</style>
-      <div style={{ position:"fixed", inset:0, zIndex:9999, pointerEvents:"none",
-        background:"rgba(253,246,236,0.55)", animation:"magicOverlay 1.1s ease forwards" }}>
+      <div style={{
+        position: "fixed", inset: 0, zIndex: 9999, pointerEvents: "none",
+        background: "rgba(253,246,236,0.55)", animation: "magicOverlay 1.1s ease forwards"
+      }}>
         {particles.map(p => (
           <div key={p.id} style={{
-            position:"absolute", left:`${p.x}%`, top:`${p.y}%`,
-            fontSize:p.size,
+            position: "absolute", left: `${p.x}%`, top: `${p.y}%`,
+            fontSize: p.size,
             "--tx": p.tx, "--ty": p.ty, "--rot": p.rot,
-            animation:`sparkleUp 0.9s ${p.delay}s ease-out both`,
-            filter:"drop-shadow(0 0 6px rgba(124,77,255,0.7))",
+            animation: `sparkleUp 0.9s ${p.delay}s ease-out both`,
+            filter: "drop-shadow(0 0 6px rgba(124,77,255,0.7))",
           }}>{p.emoji}</div>
         ))}
         <div style={{
-          position:"absolute", left:"50%", top:"50%", fontSize:80,
-          animation:"wandPop 1s 0.05s ease-out both",
-          filter:"drop-shadow(0 0 24px rgba(124,77,255,0.9))",
+          position: "absolute", left: "50%", top: "50%", fontSize: 80,
+          animation: "wandPop 1s 0.05s ease-out both",
+          filter: "drop-shadow(0 0 24px rgba(124,77,255,0.9))",
         }}>🪄</div>
       </div>
     </>
@@ -104,8 +106,8 @@ function FloatingPillNav() {
             color: activeLink === link.id ? "#fff" : "#6B5B8A",
             boxShadow: activeLink === link.id ? "0 4px 12px rgba(124,77,255,0.35)" : "none",
           }}
-          onMouseEnter={e => { if (activeLink !== link.id) { e.currentTarget.style.background="rgba(124,77,255,0.1)"; e.currentTarget.style.color="#7C4DFF"; }}}
-          onMouseLeave={e => { if (activeLink !== link.id) { e.currentTarget.style.background="transparent"; e.currentTarget.style.color="#6B5B8A"; }}}
+            onMouseEnter={e => { if (activeLink !== link.id) { e.currentTarget.style.background = "rgba(124,77,255,0.1)"; e.currentTarget.style.color = "#7C4DFF"; } }}
+            onMouseLeave={e => { if (activeLink !== link.id) { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#6B5B8A"; } }}
           >
             <span style={{ fontSize: 14 }}>{link.emoji}</span>{link.label}
           </button>
@@ -148,6 +150,15 @@ const marqueeItems = [
   { emoji: "🎙️", text: "Voice & Tone" }, { emoji: "💡", text: "Sentiment AI" },
   { emoji: "🌍", text: "Multilanguage" }, { emoji: "🤖", text: "AI Assistant" },
   { emoji: "📊", text: "Brand Score" },
+  { emoji: "🧲", text: "Lead Magnet" }, { emoji: "🚀", text: "Growth Hacker" },
+  { emoji: "🌐", text: "Domain Checker" }, { emoji: "🕵️", text: "Steal This Brand" },
+  { emoji: "📖", text: "Brand Story" }, { emoji: "📈", text: "Market Research" },
+  { emoji: "🧭", text: "Mission & Vision" }, { emoji: "💻", text: "Website Gen" },
+  { emoji: "🖼️", text: "Post Mockup" }, { emoji: "⚙️", text: "Content Auto" },
+  { emoji: "🎯", text: "Ad Generator" }, { emoji: "👥", text: "Buyer Persona" },
+  { emoji: "🔬", text: "Consistency" }, { emoji: "🧮", text: "Finances" },
+  { emoji: "🃏", text: "Brand Card" }, { emoji: "📱", text: "QR Code" },
+  { emoji: "🖌️", text: "Canva Export" },
 ];
 
 function Marquee({ reverse = false }) {
@@ -177,7 +188,7 @@ function Marquee({ reverse = false }) {
 // ─── Story Steps ──────────────────────────────────────────────────────────────
 const storySteps = [
   { chapter: "Step 01", title: "Whisper Your Vision", desc: "Tell us your industry, vibe, and goals. Our AI learns what makes your brand unique before creating a single asset.", emoji: "💬", accent: "#7C4DFF" },
-  { chapter: "Step 02", title: "AI Weaves the Magic", desc: "Watch as 13 powerful tools generate names, colors, logos, typography and more — all tailored to your exact profile.", emoji: "⚡", accent: "#FF6B9D" },
+  { chapter: "Step 02", title: "AI Weaves the Magic", desc: "Watch as 30 powerful tools generate names, colors, logos, typography and more — all tailored to your exact profile.", emoji: "⚡", accent: "#FF6B9D" },
   { chapter: "Step 03", title: "Curate & Refine", desc: "Pick your favorites, regenerate with one click, and fine-tune every element until it feels perfectly you.", emoji: "🎯", accent: "#FFB300" },
   { chapter: "Step 04", title: "Launch Your Legend", desc: "Download your complete brand package as a PDF. Every asset, every format — ready to go live.", emoji: "🚀", accent: "#4ECDC4" },
 ];
@@ -289,8 +300,8 @@ function StickyStory() {
             boxShadow: `0 6px 20px ${step.accent}38`,
             transition: "transform 0.2s, box-shadow 0.2s", alignSelf: "flex-start",
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform="translateY(-2px)"; }}
-          onMouseLeave={e => { e.currentTarget.style.transform="translateY(0)"; }}
+            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; }}
           >
             {activeStep < storySteps.length - 1 ? `Next: ${storySteps[activeStep + 1].title} →` : "Start Your Story ✨"}
           </button>
@@ -303,7 +314,7 @@ function StickyStory() {
 // ─── Stats Bar ────────────────────────────────────────────────────────────────
 const stats = [
   { value: "2,400+", label: "Founders", emoji: "👥" },
-  { value: "13", label: "AI Tools", emoji: "🛠️" },
+  { value: "30", label: "AI Tools", emoji: "🛠️" },
   { value: "98%", label: "Satisfaction", emoji: "⭐" },
   { value: "<5 min", label: "To Launch", emoji: "🚀" },
 ];
@@ -322,8 +333,8 @@ function StatsBar() {
           borderRight: i < 3 ? "1px solid rgba(124,77,255,0.1)" : "none",
           transition: "background 0.2s", cursor: "default",
         }}
-        onMouseEnter={e => e.currentTarget.style.background = "rgba(124,77,255,0.05)"}
-        onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+          onMouseEnter={e => e.currentTarget.style.background = "rgba(124,77,255,0.05)"}
+          onMouseLeave={e => e.currentTarget.style.background = "transparent"}
         >
           <div style={{ fontSize: 22, marginBottom: 6 }}>{s.emoji}</div>
           <div style={{ fontFamily: "Fredoka One", fontSize: 30, color: "#7C4DFF", lineHeight: 1 }}>{s.value}</div>
@@ -361,8 +372,8 @@ function Testimonials() {
               position: "relative", overflow: "hidden",
               transition: "transform 0.28s, box-shadow 0.28s", animationDelay: `${i * 0.08}s`,
             }}
-            onMouseEnter={e => { e.currentTarget.style.transform="translateY(-6px)"; e.currentTarget.style.boxShadow="0 20px 50px rgba(124,77,255,0.13)"; }}
-            onMouseLeave={e => { e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.boxShadow="none"; }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 50px rgba(124,77,255,0.13)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
             >
               <div style={{ position: "absolute", top: 0, right: 0, width: 80, height: 80, background: `radial-gradient(circle at top right, ${t.color}18, transparent 70%)`, pointerEvents: "none" }} />
               <div style={{ display: "flex", gap: 3, marginBottom: 16 }}>
@@ -388,7 +399,7 @@ function Testimonials() {
 const pricingPlans = [
   {
     name: "Starter",
-    price: "$19",
+    price: "₹499",
     period: "/mo",
     desc: "Perfect for indie makers and solo founders starting out.",
     features: [
@@ -403,7 +414,7 @@ const pricingPlans = [
   },
   {
     name: "Pro",
-    price: "$49",
+    price: "₹999",
     period: "/mo",
     desc: "Everything you need to launch and scale your brand identity.",
     features: [
@@ -419,7 +430,7 @@ const pricingPlans = [
   },
   {
     name: "Agency",
-    price: "$149",
+    price: "₹1499",
     period: "/mo",
     desc: "For creative teams and agencies managing multiple clients.",
     features: [
@@ -439,7 +450,7 @@ function PricingOverview({ onNav }) {
   return (
     <section id="pricing" style={{ padding: "100px 48px", scrollMarginTop: 80, background: "rgba(124,77,255,0.02)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        
+
         {/* Trial Banner */}
         <div className="reveal" style={{ display: "flex", justifyContent: "center", marginBottom: 32 }}>
           <div style={{
@@ -479,14 +490,14 @@ function PricingOverview({ onNav }) {
               transition: "transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s",
               animationDelay: `${i * 0.1}s`,
             }}
-            onMouseEnter={e => { 
+              onMouseEnter={e => {
                 e.currentTarget.style.transform = plan.mostPopular ? "scale(1.07) translateY(-8px)" : "scale(1.02) translateY(-8px)";
                 e.currentTarget.style.boxShadow = plan.mostPopular ? `0 32px 70px ${plan.color}35` : "0 20px 40px rgba(124,77,255,0.08)";
-            }}
-            onMouseLeave={e => { 
+              }}
+              onMouseLeave={e => {
                 e.currentTarget.style.transform = plan.mostPopular ? "scale(1.05)" : "scale(1)";
                 e.currentTarget.style.boxShadow = plan.mostPopular ? `0 24px 60px ${plan.color}25` : "0 10px 30px rgba(0,0,0,0.03)";
-            }}
+              }}
             >
               {plan.mostPopular && (
                 <div style={{ position: "absolute", top: -14, left: "50%", transform: "translateX(-50%)", background: `linear-gradient(135deg, ${plan.color}, #F050A8)`, color: "#fff", padding: "6px 16px", borderRadius: 99, fontSize: 12, fontWeight: 800, fontFamily: "Nunito", textTransform: "uppercase", letterSpacing: "1px", boxShadow: `0 4px 12px ${plan.color}40`, whiteSpace: "nowrap" }}>
@@ -503,7 +514,7 @@ function PricingOverview({ onNav }) {
                 {plan.desc}
               </p>
 
-              <button 
+              <button
                 onClick={() => onNav("signup")}
                 style={{
                   width: "100%", padding: "14px 0", borderRadius: 16, border: "none", cursor: "pointer",
@@ -513,8 +524,8 @@ function PricingOverview({ onNav }) {
                   boxShadow: plan.mostPopular ? `0 8px 24px ${plan.color}40` : "none",
                   transition: "all 0.2s"
                 }}
-                onMouseEnter={e => { if(!plan.mostPopular) e.currentTarget.style.background = "rgba(124,77,255,0.15)" }}
-                onMouseLeave={e => { if(!plan.mostPopular) e.currentTarget.style.background = "rgba(124,77,255,0.08)" }}
+                onMouseEnter={e => { if (!plan.mostPopular) e.currentTarget.style.background = "rgba(124,77,255,0.15)" }}
+                onMouseLeave={e => { if (!plan.mostPopular) e.currentTarget.style.background = "rgba(124,77,255,0.08)" }}
               >
                 {plan.cta}
               </button>
@@ -564,8 +575,8 @@ function HighlightCards() {
             display: "flex", gap: 18, alignItems: "flex-start",
             transition: "transform 0.26s, box-shadow 0.26s", animationDelay: `${i * 0.06}s`,
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform="translateY(-5px)"; e.currentTarget.style.boxShadow=`0 16px 40px ${h.color}1A`; }}
-          onMouseLeave={e => { e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.boxShadow="none"; }}
+            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-5px)"; e.currentTarget.style.boxShadow = `0 16px 40px ${h.color}1A`; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
           >
             <div style={{ width: 52, height: 52, borderRadius: 15, flexShrink: 0, background: `${h.color}16`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>{h.emoji}</div>
             <div>
@@ -582,15 +593,15 @@ function HighlightCards() {
 // Star data — each star has a depth factor for parallax magnitude
 const STAR_DATA = Array.from({ length: 32 }, (_, i) => ({
   id: i,
-  left:       (i * 37.3 + 3)  % 100,
-  top:        (i * 53.7 + 7)  % 88,
-  size:       [12, 16, 20, 24, 28][i % 5],
-  depth:      0.08 + (i % 7) * 0.055,   // 0.08 → 0.41 — controls how far each star moves
-  floatDur:   3.2 + (i % 6) * 0.7,
+  left: (i * 37.3 + 3) % 100,
+  top: (i * 53.7 + 7) % 88,
+  size: [12, 16, 20, 24, 28][i % 5],
+  depth: 0.08 + (i % 7) * 0.055,   // 0.08 → 0.41 — controls how far each star moves
+  floatDur: 3.2 + (i % 6) * 0.7,
   floatDelay: (i * 0.42) % 5,
-  opacity:    0.35 + (i % 4) * 0.15,
-  color:      ["#7C4DFF","#F050A8","#FFB300","#7C4DFF","#00C9B4"][i % 5],
-  shape:      ["✦","✧","✦","✦","✧","✦","✦","✧"][i % 8],
+  opacity: 0.35 + (i % 4) * 0.15,
+  color: ["#7C4DFF", "#F050A8", "#FFB300", "#7C4DFF", "#00C9B4"][i % 5],
+  shape: ["✦", "✧", "✦", "✦", "✧", "✦", "✦", "✧"][i % 8],
 }));
 
 // ─── Cursor-Tracking Star Field ───────────────────────────────────────────────
@@ -599,14 +610,14 @@ const STAR_DATA = Array.from({ length: 32 }, (_, i) => ({
 //   inner div → float bob animation via CSS (animation only affects inner, never fights outer transform)
 function StarField() {
   const outerRefs = useRef([]);   // refs to the parallax-moving outer divs
-  const mouseRef  = useRef({ x: 0, y: 0 });   // raw mouse target
-  const curRef    = useRef({ x: 0, y: 0 });   // smoothed current position
-  const rafRef    = useRef(null);
+  const mouseRef = useRef({ x: 0, y: 0 });   // raw mouse target
+  const curRef = useRef({ x: 0, y: 0 });   // smoothed current position
+  const rafRef = useRef(null);
 
   useEffect(() => {
     const onMove = (e) => {
       // Map cursor to -1…+1 range centred on screen
-      mouseRef.current.x = (e.clientX / window.innerWidth  - 0.5) * 2;
+      mouseRef.current.x = (e.clientX / window.innerWidth - 0.5) * 2;
       mouseRef.current.y = (e.clientY / window.innerHeight - 0.5) * 2;
     };
     window.addEventListener("mousemove", onMove, { passive: true });
@@ -622,7 +633,7 @@ function StarField() {
       // Write directly to each DOM node — zero React re-renders, silky 60fps
       outerRefs.current.forEach((el, i) => {
         if (!el) return;
-        const s  = STAR_DATA[i];
+        const s = STAR_DATA[i];
         const px = curRef.current.x * s.depth * 90;   // max travel px = depth × 90
         const py = curRef.current.y * s.depth * 90;
         el.style.transform = `translate(${px}px, ${py}px)`;
@@ -654,18 +665,18 @@ function StarField() {
           ref={el => outerRefs.current[i] = el}
           style={{
             position: "absolute",
-            left:     `${s.left}%`,
-            top:      `${s.top}%`,
+            left: `${s.left}%`,
+            top: `${s.top}%`,
             willChange: "transform",
           }}
         >
           {/* INNER: only float animation — never touches outer transform */}
           <div style={{
-            fontSize:  s.size,
-            opacity:   s.opacity,
-            color:     s.color,
+            fontSize: s.size,
+            opacity: s.opacity,
+            color: s.color,
             animation: `starBob ${s.floatDur}s ease-in-out ${s.floatDelay}s infinite`,
-            filter:    `drop-shadow(0 0 ${Math.round(s.size / 3)}px ${s.color})`,
+            filter: `drop-shadow(0 0 ${Math.round(s.size / 3)}px ${s.color})`,
             lineHeight: 1,
           }}>
             {s.shape}
@@ -678,7 +689,7 @@ function StarField() {
 
 const HanddrawnDivider = () => (
   <svg width="100%" height="50" viewBox="0 0 1200 50" style={{ margin: "32px 0", opacity: 0.2 }}>
-    <path d="M 0 25 Q 150 8 300 25 T 600 25 T 900 25 T 1200 25" stroke="#7C4DFF" strokeWidth="2" fill="none" strokeLinecap="round"/>
+    <path d="M 0 25 Q 150 8 300 25 T 600 25 T 900 25 T 1200 25" stroke="#7C4DFF" strokeWidth="2" fill="none" strokeLinecap="round" />
   </svg>
 );
 
@@ -779,7 +790,7 @@ export default function LandingPage({ onNav }) {
       {/* CHAPTER 1 — features */}
       <section id="features" style={{ scrollMarginTop: 80 }}>
         <div className="reveal" style={{ textAlign: "center", padding: "72px 24px 40px" }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "#7C4DFF", fontFamily: "Nunito", marginBottom: 8, textTransform: "uppercase", letterSpacing: "1px" }}>📖 Chapter 1 · 13 Enchanted Tools</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "#7C4DFF", fontFamily: "Nunito", marginBottom: 8, textTransform: "uppercase", letterSpacing: "1px" }}>📖 Chapter 1 · 30 Enchanted Tools</div>
           <h2 style={{ fontSize: "clamp(34px,5vw,52px)", fontWeight: 800, color: "#2D1B69", fontFamily: "Fredoka One", marginBottom: 12 }}>Everything Your Brand Needs</h2>
           <p style={{ color: "#6B5B8A", fontSize: 17, fontFamily: "Nunito", fontWeight: 500 }}>Powered by AI. Guided by your story.</p>
         </div>
@@ -842,10 +853,10 @@ export default function LandingPage({ onNav }) {
             <div style={{ color: "#6B5B8A", fontSize: 13, fontFamily: "Nunito", lineHeight: 1.5 }}>Where brand dreams come true. ✨</div>
           </div>
           <div style={{ display: "flex", gap: 12 }}>
-            {["twitter","instagram","linkedin"].map(s => (
+            {["twitter", "instagram", "linkedin"].map(s => (
               <div key={s} style={{ width: 40, height: 40, borderRadius: 12, background: "rgba(124,77,255,0.08)", border: "1.5px solid rgba(124,77,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.2s" }}
-                onMouseEnter={e => { e.currentTarget.style.background="rgba(124,77,255,0.16)"; e.currentTarget.style.transform="translateY(-2px)"; }}
-                onMouseLeave={e => { e.currentTarget.style.background="rgba(124,77,255,0.08)"; e.currentTarget.style.transform="translateY(0)"; }}
+                onMouseEnter={e => { e.currentTarget.style.background = "rgba(124,77,255,0.16)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "rgba(124,77,255,0.08)"; e.currentTarget.style.transform = "translateY(0)"; }}
               >
                 <Icon name={s} size={18} color="#7C4DFF" />
               </div>

@@ -19,6 +19,9 @@ if (isProduction) {
   app.use(express.static(path.join(__dirname, "build")));
 }
 
+// Serve static files in development (for production build)
+app.use(express.static(path.join(__dirname, "build")));
+
 // ── Groq chat proxy ──────────────────────────────────────────────────────────
 app.post("/api/chat", async (req, res) => {
   try {
@@ -147,6 +150,74 @@ app.post("/api/stability-image", async (req, res) => {
   }
 });
 
+// ── Vercel Direct Deployment (No GitHub Required) ────────────────────────────
+app.post("/api/deploy", async (req, res) => {
+  const { html, brandName } = req.body;
+  if (!html) return res.status(400).json({ error: "Missing HTML content" });
+
+  const VERCEL_TOKEN = process.env.VERCEL_TOKEN;
+
+  if (!VERCEL_TOKEN) {
+    return res.status(500).json({ error: "Vercel API token is not configured on the server." });
+  }
+
+  try {
+    const timestamp = Date.now();
+    const safeName = (brandName || "site").toLowerCase().replace(/[^a-z0-9-]/g, "");
+    const vercelProjectName = `brandcraft-${safeName}-${timestamp}`;
+
+    // Create a simple JSON payload with the HTML content
+    const deploymentPayload = {
+      name: vercelProjectName,
+      target: "production",
+      files: [
+        {
+          file: "index.html",
+          data: html
+        }
+      ],
+      projectSettings: {
+        framework: null,
+        devCommand: null,
+        installCommand: null,
+        buildCommand: null,
+        outputDirectory: null,
+        rootDirectory: null
+      }
+    };
+
+    // Deploy directly to Vercel using the correct API format
+    const vercelRes = await fetch("https://api.vercel.com/v13/deployments", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${VERCEL_TOKEN}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(deploymentPayload)
+    });
+
+    if (!vercelRes.ok) {
+      const err = await vercelRes.json();
+      throw new Error(`Vercel Deployment Failed: ${err.error?.message || "Unknown error"}`);
+    }
+
+    const vercelData = await vercelRes.json();
+
+    // Wait a moment for deployment to initialize
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    return res.status(200).json({
+      url: `https://${vercelData.url}`,
+      deploymentId: vercelData.id,
+      status: "success",
+      message: "Deployment initiated successfully"
+    });
+  } catch (error) {
+    console.error("Deployment Error:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
 // Debug endpoint to check API keys
 app.get("/api/debug-keys", (req, res) => {
   res.json({
@@ -170,4 +241,3 @@ app.listen(PORT, () => {
   console.log(`   Gemini key:    ${GEMINI_KEY ? "✓ set" : "✗ missing — add GEMINI_API_KEY to .env"}`);
   console.log(`   Stability key: ${STABILITY_KEY ? "✓ set" : "✗ missing — add STABILITY_API_KEY to .env"}`);
 });
-

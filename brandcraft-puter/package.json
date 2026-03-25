@@ -16,6 +16,7 @@
     "react-scripts": "5.0.1",
     "form-data": "^4.0.0"
   },
+  "proxy": "http://localhost:3001",
   "scripts": {
     "start": "concurrently \"node server.js\" \"react-scripts start\"",
     "build": "react-scripts build",
